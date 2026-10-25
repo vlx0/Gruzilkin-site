@@ -1127,6 +1127,70 @@ html.no-speech .sayrow{display:none}
   .hero__trust{margin-top:16px;padding-top:12px}
 }
 
+  /* ============================================================
+     МОБИЛЬНАЯ ВЕРСИЯ: ДОСТУПНОСТЬ И УДОБСТВО
+     Три проблемы, замеренные на экране 390px:
+       1) шапка не влезала — бургер уезжал за правый край (418px
+          при ширине экрана 390): на телефоне меню было недоступно;
+       2) цена «от 1 800 ₽» ломалась на две строки — знак рубля
+          падал вниз, мелкая подпись зажимала её с боков;
+       3) столбик из пяти круглых кнопок связи справа перекрывал
+          текст, кнопки CTA и «плюсики» FAQ — по ним нельзя было
+          попасть пальцем.
+     ============================================================ */
+  @media (max-width:600px){
+    /* ── шапка: всё должно помещаться в 320–390px ── */
+    .topbar__in{padding:0 12px;gap:8px}
+    .topbar .brand{padding:6px 10px 6px 7px;margin-left:-7px;border-radius:11px}
+    .brand__mark{width:26px;height:26px;flex:0 0 26px}
+    .brand__name{font-size:15.5px}
+    .btn-blink-order{font-size:12px;min-height:40px;padding:8px 10px;margin-right:2px}
+    .burger{width:42px;min-width:42px}
+
+    /* ── цена в хиро: столбиком, без переносов ── */
+    .hero__price{flex-direction:column;align-items:center;gap:6px;margin-top:18px}
+    .hero__price span{white-space:nowrap}
+    .hero__price small{max-width:30ch}
+
+    /* ── кнопки связи: горизонтальный ряд над нижней панелью,
+          а не столбик через весь экран ── */
+    .dock{right:12px;bottom:78px;z-index:1085}
+    .dock__col{flex-direction:row;gap:8px}
+    .dock__b{width:44px;height:44px}
+    .dock__b svg{width:22px;height:22px}
+    .dock__avatar{width:38px;height:38px}
+    /* МАКС — кнопка без действия (cursor:default, нет обработчика):
+       на телефоне только занимает место в ряду */
+    .dock__b--max{display:none}
+
+    /* меню поверх кнопок связи, но ПОД шапкой — иначе бургер
+       (он же крестик) уходит под меню и меню не закрыть */
+    .mobnav{z-index:1095}
+
+    /* ── мобильное меню: крупнее зоны нажатия, стрелка-подсказка.
+       Стрелки только на пунктах меню, не на кнопках внизу ── */
+    .mobnav > a{display:flex;align-items:center;justify-content:space-between;
+      min-height:60px;padding:12px 0}
+    .mobnav > a::after{content:"→";color:var(--accent);font-weight:800;font-size:22px}
+
+    /* нижняя панель: чуть выше кнопки и без синего вспыхивания
+       при касании на Android */
+    .mobar .btn{min-height:54px}
+    a,button{-webkit-tap-highlight-color:transparent}
+  }
+  /* совсем узкие экраны (320–359px): кнопку заказа из шапки убираем —
+     она остаётся в нижней панели, а бургер должен поместиться */
+  @media (max-width:359px){
+    .topbar .btn-blink-order{display:none}
+  }
+  /* нижняя панель на узких экранах: «Оформить заказ» не влезал
+     в свою колонку — текст обрезался. Ужимаем шрифт и поля */
+  @media (max-width:380px){
+    .mobar__in{gap:8px}
+    .mobar .btn{font-size:13px;padding:0 8px;gap:6px}
+    .mobar .btn svg{width:16px;height:16px}
+  }
+
 @media print{
   .topbar,.mobar,.mobnav,.bot,.to-top,.sayrow{display:none}
   .sec{page-break-inside:avoid}
