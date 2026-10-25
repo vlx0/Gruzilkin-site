@@ -1141,13 +1141,12 @@ html.no-speech .sayrow{display:none}
        без надписей поверх), а заголовок, цена и кнопки — под ней,
        на графитовом фоне. */
     .hero__in{display:flex;flex-direction:column;padding:64px 0 0}
-    /* Фото целиком, без обрезки. В исходном кадре слева была
-       «запечена» графитовая панель под десктопный текст — для
-       телефона она вырезана (assets/hero-photo.webp, 1106×960).
-       contain вписывает кадр по ширине экрана целиком, блок по
+    /* Фото целиком, без обрезки. Присланный владельцем кадр
+       (1446×1087) — тот же сюжет без графитовой панели.
+       contain вписывает его по ширине экрана целиком, блок по
        пропорции фото — без пустых полей. */
     .hero__bg{order:-1;position:relative;inset:auto;width:100%;
-      aspect-ratio:1106/960;height:auto;
+      aspect-ratio:1446/1087;height:auto;
       background-image:url(assets/hero-photo.webp);
       background-size:contain;background-position:center top;
       background-color:var(--black)}
