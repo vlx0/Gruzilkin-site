@@ -1139,6 +1139,17 @@ html.no-speech .sayrow{display:none}
     /* бургер был чёрным квадратом — на графите он пропадал бы */
     .topbar .burger{background:transparent}
 
+    /* ── фото на первом месте: текст больше не лежит на фото ──
+       Раньше текст висел поверх фотографии с тёмной плёнкой.
+       Теперь первым экраном идёт сама фотография (видна целиком,
+       без надписей поверх), а заголовок, цена и кнопки — под ней,
+       на графитовом фоне. */
+    .hero__in{display:flex;flex-direction:column;padding:64px 0 0}
+    .hero__bg{order:-1;position:relative;inset:auto;width:100%;height:min(60vh,540px)}
+    /* плёнки-затемнения больше не нужны: текста на фото нет */
+    .hero__bg::before,.hero__bg::after,.hero__txt::before{content:none}
+    .hero__txt{padding:22px var(--pad) 30px}
+
     /* ── шапка: всё должно помещаться в 320–390px ── */
     .topbar__in{padding:0 12px;gap:8px}
     .topbar .brand{padding:6px 10px 6px 7px;margin-left:-7px;border-radius:11px}
