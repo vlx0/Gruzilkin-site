@@ -1149,6 +1149,7 @@ html.no-speech .sayrow{display:none}
 }
 .callmodal__in:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--black)}
 .callmodal__go{margin-top:8px;width:100%}
+.callmodal__go--max{margin-top:0}
 .callmodal__note{font-size:12px;color:var(--gray-1)}
 .callmodal__note a{text-decoration:underline}
 .callmodal__done b{display:block;font-size:20px;margin-bottom:6px}
@@ -2543,12 +2544,13 @@ html.no-speech .sayrow{display:none}
       <input class="callmodal__in" id="callName" name="name" type="text" placeholder="Как к вам обращаться" maxlength="40">
       <label class="callmodal__lbl" for="callPhone">Телефон</label>
       <input class="callmodal__in" id="callPhone" name="phone" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" required pattern="[0-9()+\s\-]{6,20}">
-      <button class="btn btn--main callmodal__go" type="submit">Перезвоните мне</button>
+      <button class="btn btn--main callmodal__go" type="submit" data-via="wa">Отправить в WhatsApp</button>
+      <button class="btn btn--ghost callmodal__go callmodal__go--max" type="submit" data-via="max">Отправить в МАКС</button>
       <p class="callmodal__note">Нажимая кнопку, вы соглашаетесь с <a href="policy.html">политикой конфиденциальности</a></p>
     </form>
     <div class="callmodal__done" hidden>
       <b>Заявка принята!</b>
-      <p>Открываем WhatsApp — отправьте сообщение, и диспетчер перезвонит.</p>
+      <p id="callDoneText">Открываем мессенджер — отправьте сообщение, и диспетчер перезвонит.</p>
       <button class="btn btn--ghost" type="button" data-call-close>Понятно</button>
     </div>
   </div>
@@ -2978,6 +2980,8 @@ html.no-speech .sayrow{display:none}
   var form = document.getElementById("callForm");
   var done = modal.querySelector(".callmodal__done");
   var phone = document.getElementById("callPhone");
+  var doneText = document.getElementById("callDoneText");
+  var doneDefault = doneText ? doneText.textContent : "";
   if (!modal || !openBtn || !form) return;
 
   function show(open) {
@@ -2999,11 +3003,40 @@ html.no-speech .sayrow{display:none}
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    var via = e.submitter && e.submitter.getAttribute("data-via") || "wa";
     var name = document.getElementById("callName").value.trim();
     var tel = phone.value.trim();
     if (!tel) return;
     var text = "Заказать звонок." + (name ? " Имя: " + name + "." : "") + " Телефон: " + tel;
+
+    if (via === "max") {
+      /* В МАКС текст заявки копируется в буфер обмена: у мессенджера
+         пока нет подстановки текста в ссылку. Пользователь вставляет
+         его в чат одним нажатием. Ссылка на чат компании — MAX_LINK. */
+      var MAX_LINK = "https://max.ru";
+      var finish = function () {
+        doneText.textContent = "Текст заявки скопирован. Открываем МАКС — вставьте его в чат и отправьте.";
+        form.hidden = true;
+        done.hidden = false;
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(finish, function () { finish(); });
+      } else {
+        finish();
+      }
+      window.open(MAX_LINK, "_blank", "noopener");
+      setTimeout(function () {
+        show(false);
+        form.reset();
+        form.hidden = false;
+        done.hidden = true;
+        doneText.textContent = doneDefault;
+      }, 6000);
+      return;
+    }
+
     window.open("https://wa.me/79033695311?text=" + encodeURIComponent(text), "_blank", "noopener");
+    doneText.textContent = doneDefault;
     form.hidden = true;
     done.hidden = false;
     setTimeout(function () {
