@@ -1117,6 +1117,43 @@ html.no-speech .sayrow{display:none}
   .hero__trust{margin-top:16px;padding-top:12px}
 }
 
+/* ── форма «Заказать звонок» ──
+   Модальное окно поверх всего (z-index выше шапки и меню),
+   тёмная подложка поверх фото первого экрана. */
+.callmodal{
+  position:fixed;inset:0;z-index:1300;
+  display:grid;place-items:center;padding:16px;
+  background:rgba(20,24,28,.62);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+}
+.callmodal[hidden]{display:none!important}
+.callmodal__card{
+  position:relative;width:min(420px,100%);
+  background:var(--white);border-radius:var(--r-lg);
+  padding:24px 22px 18px;
+  box-shadow:0 24px 60px rgba(0,0,0,.4);
+}
+.callmodal__x{
+  position:absolute;top:10px;right:10px;width:36px;height:36px;
+  border-radius:10px;background:#F3F4F6;color:var(--black);
+  font-size:20px;line-height:1;display:grid;place-items:center;
+}
+.callmodal__x:hover{background:var(--accent)}
+.callmodal__ttl{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.callmodal__sub{margin-top:6px;font-size:14px;color:var(--gray-1)}
+.callmodal form{margin-top:16px;display:grid;gap:8px}
+.callmodal__lbl{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.callmodal__in{
+  min-height:50px;border:1.5px solid var(--line);border-radius:12px;
+  padding:0 14px;font-size:16px;background:var(--white);
+}
+.callmodal__in:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--black)}
+.callmodal__go{margin-top:8px;width:100%}
+.callmodal__note{font-size:12px;color:var(--gray-1)}
+.callmodal__note a{text-decoration:underline}
+.callmodal__done b{display:block;font-size:20px;margin-bottom:6px}
+.callmodal__done p{font-size:15px;margin-bottom:14px}
+
   /* ============================================================
      МОБИЛЬНАЯ ВЕРСИЯ: ДОСТУПНОСТЬ И УДОБСТВО
      Три проблемы, замеренные на экране 390px:
@@ -1336,9 +1373,9 @@ html.no-speech .sayrow{display:none}
     <a class="hdr-tel" href="tel:+73532432424">
       <svg aria-hidden="true"><use href="#i-phone"/></svg>8 (3532) 43-24-24
     </a>
-    <a class="btn-blink-order" href="tel:+73532432424" aria-label="Заказать Газель — звонок на номер 83532832424">
-      Оформить заказ
-    </a>
+    <button type="button" class="btn-blink-order" id="callOpen" aria-label="Заказать звонок — перезвоним и примем заказ">
+      Заказать звонок
+    </button>
 
     <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobnav">
       <span></span>
@@ -2495,6 +2532,31 @@ html.no-speech .sayrow{display:none}
 
 </script>
 
+<!-- ── Форма «Заказать звонок» ──
+     Открывается кнопкой в шапке. Поверх всего, включая фото
+     первого экрана. Без бэкенда: заявка уходит в WhatsApp
+     диспетчерской с именем и телефоном. -->
+<div class="callmodal" id="callModal" role="dialog" aria-modal="true" aria-labelledby="callTitle" hidden>
+  <div class="callmodal__card">
+    <button type="button" class="callmodal__x" aria-label="Закрыть форму">×</button>
+    <div class="callmodal__ttl" id="callTitle">Заказать звонок</div>
+    <p class="callmodal__sub">Перезвоним в рабочее время: ежедневно 8:30 — 23:30</p>
+    <form id="callForm" autocomplete="off">
+      <label class="callmodal__lbl" for="callName">Ваше имя</label>
+      <input class="callmodal__in" id="callName" name="name" type="text" placeholder="Как к вам обращаться" maxlength="40">
+      <label class="callmodal__lbl" for="callPhone">Телефон</label>
+      <input class="callmodal__in" id="callPhone" name="phone" type="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" required pattern="[0-9()+\s\-]{6,20}">
+      <button class="btn btn--main callmodal__go" type="submit">Перезвоните мне</button>
+      <p class="callmodal__note">Нажимая кнопку, вы соглашаетесь с <a href="policy.html">политикой конфиденциальности</a></p>
+    </form>
+    <div class="callmodal__done" hidden>
+      <b>Заявка принята!</b>
+      <p>Открываем WhatsApp — отправьте сообщение, и диспетчер перезвонит.</p>
+      <button class="btn btn--ghost" type="button" data-call-close>Понятно</button>
+    </div>
+  </div>
+</div>
+
 <!-- Помощник: отвечает по данным компании, собирает заявку -->
 <script>
 (function () {
@@ -2907,5 +2969,52 @@ html.no-speech .sayrow{display:none}
 
   /* кнопки показываются только вместе со скриптом: без него они были бы мёртвыми */
   document.documentElement.classList.add("has-bot");
+})();
+</script>
+
+<!-- Форма «Заказать звонок»: открытие, закрытие, отправка в WhatsApp -->
+<script>
+(function () {
+  "use strict";
+  var modal = document.getElementById("callModal");
+  var openBtn = document.getElementById("callOpen");
+  var form = document.getElementById("callForm");
+  var done = modal.querySelector(".callmodal__done");
+  var phone = document.getElementById("callPhone");
+  if (!modal || !openBtn || !form) return;
+
+  function show(open) {
+    modal.hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) setTimeout(function () { phone.focus(); }, 60);
+  }
+
+  openBtn.addEventListener("click", function () { show(true); });
+  modal.querySelector(".callmodal__x").addEventListener("click", function () { show(false); });
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) show(false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modal.hidden) show(false);
+  });
+  var doneBtn = modal.querySelector("[data-call-close]");
+  if (doneBtn) doneBtn.addEventListener("click", function () { show(false); });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("callName").value.trim();
+    var tel = phone.value.trim();
+    if (!tel) return;
+    var text = "Заказать звонок." + (name ? " Имя: " + name + "." : "") + " Телефон: " + tel;
+    window.open("https://wa.me/79033695311?text=" + encodeURIComponent(text), "_blank", "noopener");
+    form.hidden = true;
+    done.hidden = false;
+    setTimeout(function () {
+      show(false);
+      form.reset();
+      form.hidden = false;
+      done.hidden = true;
+    }, 3500);
+  });
 })();
 </script>
