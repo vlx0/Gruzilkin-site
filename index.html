@@ -992,12 +992,8 @@ html.no-speech .sayrow{display:none}
   .adv__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:600px){
-  /* На телефоне то же полноразмерное фото, что и на десктопе:
-     cover сам кадрирует под вертикальный экран. Фокус сдвинут
-     на машину (≈74% ширины кадра): по центру в узкий экран
-     попадала бы башня, а машина с грузчиками уезжала за край.
-     Прежний отдельный вертикальный кроп борта больше не нужен. */
-  .hero__bg{background-position:74% 50%}
+  /* Текст на фото больше не живёт, поэтому затемняющие плёнки
+     на телефоне не нужны вовсе. */
   .hero__bg::before{
     /* На телефоне текст занимает почти весь экран, поэтому затемнение
        ровное: снимок виден, но буквы читаются поверх него. */
@@ -1145,7 +1141,16 @@ html.no-speech .sayrow{display:none}
        без надписей поверх), а заголовок, цена и кнопки — под ней,
        на графитовом фоне. */
     .hero__in{display:flex;flex-direction:column;padding:64px 0 0}
-    .hero__bg{order:-1;position:relative;inset:auto;width:100%;height:min(60vh,540px)}
+    /* Фото целиком, без обрезки. В исходном кадре слева была
+       «запечена» графитовая панель под десктопный текст — для
+       телефона она вырезана (assets/hero-photo.webp, 1106×960).
+       contain вписывает кадр по ширине экрана целиком, блок по
+       пропорции фото — без пустых полей. */
+    .hero__bg{order:-1;position:relative;inset:auto;width:100%;
+      aspect-ratio:1106/960;height:auto;
+      background-image:url(assets/hero-photo.webp);
+      background-size:contain;background-position:center top;
+      background-color:var(--black)}
     /* плёнки-затемнения больше не нужны: текста на фото нет */
     .hero__bg::before,.hero__bg::after,.hero__txt::before{content:none}
     .hero__txt{padding:22px var(--pad) 30px}
