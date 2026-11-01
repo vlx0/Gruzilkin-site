@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="gruzilkin-build" content="1791834478915">
+<meta name="gruzilkin-build" content="1791834478922">
 <title>Грузовое такси с грузчиками в Оренбурге — 8 (3532) 43-24-24 · Грузилкин</title>
 <meta name="description" content="Грузовое такси и грузчики в Оренбурге с 2009 года. Подача газели от 15 минут, 100+ машин, 8 (3532) 43-24-24.">
 <meta property="og:type" content="website">
@@ -159,13 +159,11 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
    компании пропадало бы на тёмной клетке. Сделано так же, как на
    борту: надпись лежит на панели, а шахматка идёт вокруг. */
 .topbar{
-  background:
-    repeating-conic-gradient(var(--accent) 0 25%, var(--black) 0 50%) 0 0/44px 44px;
+  background:var(--black);
   border-bottom:1px solid var(--black);
 }
 .topbar.is-stuck{
-  background:
-    repeating-conic-gradient(var(--accent) 0 25%, var(--black) 0 50%) 0 0/44px 44px;
+  background:var(--black);
   backdrop-filter:none;
 }
 
@@ -185,25 +183,6 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
   background:var(--black);border-radius:999px;
   padding:9px 16px;color:var(--white);
 }
-.topbar .burger{
-  background:var(--black);border-radius:12px;
-}
-.topbar .burger span{background:var(--white)}
-.topbar .burger span::before,.topbar .burger span::after{background:var(--white)}
-/* Кнопка заказа жёлтая: на жёлтой клетке её край пропадает,
-   поэтому отделяем её белым кольцом. */
-.topbar .btn-blink-order{box-shadow:0 0 0 4px var(--white)}
-
-@media (max-width:900px){
-  .topbar{
-    background:
-      repeating-conic-gradient(var(--accent) 0 25%, var(--black) 0 50%) 0 0/36px 36px;
-  }
-  .topbar.is-stuck{
-    background:
-      repeating-conic-gradient(var(--accent) 0 25%, var(--black) 0 50%) 0 0/36px 36px;
-  }
-}
 
 .topbar{
   position:fixed;inset:0 0 auto;z-index:1100;
@@ -215,11 +194,11 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
   height:72px;display:flex;align-items:center;gap:clamp(12px,1.6vw,28px);
 }
 .brand{display:flex;align-items:center;gap:11px;flex:0 0 auto}
-.brand__mark{width:32px;height:32px;flex:0 0 32px}
+.brand__mark{width:32px;height:32px;flex:0 0 32px;border-radius:11px;object-fit:cover}
 .brand__name{font-size:19px;font-weight:800;letter-spacing:.02em}
 .brand__sub{display:block;font-size:10px;font-weight:600;letter-spacing:.14em;
   text-transform:uppercase;color:var(--gray-1);margin-top:1px}
-.nav{margin-left:auto;display:none;align-items:center;gap:clamp(10px,1.4vw,24px)}
+.nav{margin-left:auto;display:flex;align-items:center;gap:clamp(10px,1.4vw,24px)}
 .nav a{font-size:14.5px;font-weight:500;position:relative;padding:6px 0;color:var(--black)}
 .nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;
   background:var(--accent);transform:scaleX(0);transform-origin:right;
@@ -230,7 +209,7 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
 .hdr-tel svg{width:16px;height:16px;color:var(--accent)}
 .hdr-cta{display:none}
 
-/* Моргающая жёлтая кнопка в шапке: Заказать Газель -> tel:83532832424 */
+/* Моргающая жёлтая кнопка в шапке. */
 @keyframes btn-blink-pulse {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(255, 212, 0, 0.8), 0 3px 10px rgba(0, 0, 0, 0.15);
@@ -254,7 +233,7 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
   animation: btn-blink-pulse 1.3s infinite ease-in-out;
 }
 @media (prefers-reduced-motion:reduce){
-  .btn--order{animation:none!important}
+  .btn--order,.btn-blink-order{animation:none!important}
 }
 
 .btn-blink-order{
@@ -273,44 +252,26 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
   white-space: nowrap;
   letter-spacing: -0.01em;
   border: 2px solid var(--black);
-  animation: btn-blink-pulse 1.3s infinite ease-in-out;
+  box-shadow: none;
   cursor: pointer;
   margin-left: auto;
   margin-right: 8px;
   transition: transform .2s ease;
 }
+.btn-blink-order.is-lit{box-shadow:0 0 16px 5px #FFD400}
 .btn-blink-order:hover {
   transform: scale(1.06);
-  filter: brightness(1.1);
 }
 @media (max-width: 640px) {
   .btn-blink-order {
     font-size: 13.5px;
     min-height: 44px;
     padding: 10px 14px;
-    margin-right: 4px;
+    margin-left: 12px;
+    margin-right: 0;
   }
 }
-.burger{margin-left:0;width:44px;height:44px;min-width:44px;min-height:44px;display:grid;place-items:center}
-.burger span{display:block;width:20px;height:2px;background:var(--black);position:relative;transition:background .2s}
-.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;
-  background:var(--black);transition:transform .28s var(--ease)}
-.burger span::before{top:-6px}
-.burger span::after{top:6px}
-.burger[aria-expanded="true"] span{background:transparent}
-.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
-.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
 
-/* мобильное меню */
-.mobnav{
-  position:fixed;inset:0;z-index:1090;background:var(--white);
-  display:flex;flex-direction:column;justify-content:center;gap:4px;
-  padding:88px var(--pad) 40px;opacity:0;visibility:hidden;
-  transition:opacity .3s var(--ease),visibility .3s;
-}
-.mobnav.is-open{opacity:1;visibility:visible}
-.mobnav a{font-size:clamp(26px,7vw,34px);font-weight:800;padding:14px 0;
-  border-bottom:1px solid var(--line);letter-spacing:-.02em}
 /* фиксированные маскоты (Заяц и Бык) в полный рост страницы */
 .mascot-side{
   /* z-index 1, а не 99: маскоты должны быть ПОД текстом. Слои
@@ -357,7 +318,6 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
    просил убрать серые буквы совсем. */
 .hero .eyebrow,.hero__sub,.hero__types span,.hero__trust,
 .calc .eyebrow,.calc__note,.calc__total span,
-.park .eyebrow,.park .shead p,.car__spec dt,.car__p span,
 .work .eyebrow,.work .shead p,
 .fin .eyebrow,.fin p,.fin__hours,
 .foot .eyebrow,.foot__list a,.foot__bot,.foot__s{color:var(--gray-2)}
@@ -378,7 +338,9 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
    экран поверх машины. */
 @media (min-width:1101px){
   .hero__in{grid-template-columns:minmax(0,1fr)}
-  .hero__txt{max-width:640px}
+  .hero__txt{max-width:none}
+  .hdr-tel{display:flex}
+  .btn-blink-order{margin-left:0;margin-right:0}
 }
 .hero__eyebrow{
   font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
@@ -393,11 +355,93 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
 .hero__price small{font-size:15px;font-weight:500;color:var(--gray-2);letter-spacing:0}
 .hero__sub{margin-top:14px;font-size:17px;color:var(--gray-2);max-width:44ch}
 .hero__types{
-  display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;
+  gap:12px;width:min(100%,480px);margin:40px auto 0;padding:0;list-style:none;
 }
-.hero__types span{
-  font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;
-  border:1px solid var(--line-d);color:var(--gray-2);
+.hero__types li{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  flex:0 1 auto;min-width:42%;
+  min-height:0;margin:0;padding:0;
+  border-radius:999px;border:1px solid #9AD4FF;
+  background:#353C44;color:var(--white);
+  font-size:15px;font-weight:650;line-height:1.25;letter-spacing:-.01em;
+  box-shadow:0 10px 22px rgba(0,0,0,.22);
+}
+.hero__types li:first-child{
+  flex:1 1 100%;border-color:#9AD4FF;
+  font-size:28px;line-height:1.2;padding:0;min-height:0;
+}
+@keyframes island-garland{
+  0%,12%{
+    background:#00FF00;color:#000;border-color:#00FF00;
+    box-shadow:0 0 18px rgba(0,255,0,.95);
+  }
+  20%,100%{
+    background:#353C44;color:var(--white);border-color:#9AD4FF;
+    box-shadow:0 10px 22px rgba(0,0,0,.22);
+  }
+}
+.hero__types li{animation:island-garland 3.5s linear infinite}
+.hero__types li:nth-child(2){animation-delay:.7s}
+.hero__types li:nth-child(3){animation-delay:1.4s}
+.hero__types li:nth-child(4){animation-delay:2.1s}
+.hero__types li:nth-child(5){animation-delay:2.8s}
+.hero__types li:has(.hero__type.is-on){
+  animation:none;
+  background:#353C44;color:var(--white);border-color:#9AD4FF;
+  box-shadow:0 10px 22px rgba(0,0,0,.22);
+}
+.hero__types-wide{flex:1 1 100%}
+.hero__type{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;min-height:48px;margin:0;padding:12px 16px;
+  border:0;background:none;color:inherit;cursor:pointer;
+  font:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;
+}
+.hero__types li:first-child .hero__type{min-height:72px;padding:16px 18px}
+.hero__types-lead{
+  margin:0;width:100%;box-sizing:border-box;text-align:center;
+  font-size:22px;font-weight:800;letter-spacing:.12em;line-height:1.2;
+  color:var(--white);background:var(--black);
+  border:1px solid var(--line-d);border-radius:999px;
+  padding:14px 28px;
+}
+.hero__line{
+  margin:0;display:flex;align-items:center;justify-content:center;gap:8px;
+  flex-wrap:nowrap;text-align:center;
+  font-family:Calibri, "Segoe UI", sans-serif;
+  font-size:clamp(18px, calc((100vw - 52px) / 13.4), 48px);
+  font-weight:400;line-height:1.2;
+  color:var(--white);
+}
+.hero__line span{white-space:nowrap}
+@media (min-width:601px){
+  .hero__line{padding-right:160px;box-sizing:border-box}
+  .hero__in{
+    max-width:none;width:100%;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+    padding:100px 24px 48px;
+  }
+  .hero__txt{
+    max-width:none;width:100%;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .hero__txt::before{content:none}
+  .hero__bg::before{background:rgba(43,49,56,.42)}
+  .hero__bg::after{content:none}
+  .hero__types{
+    width:min(560px,calc(100% - 48px));
+    margin:32px auto 0;gap:14px;
+  }
+  .hero__types li,
+  .hero__types li:first-child,
+  .hero__types-wide{
+    flex:1 1 100%;width:100%;min-width:0;font-size:18px;
+  }
+  .hero__types li:first-child .hero__type{min-height:54px;padding:14px 18px}
+}
+.hero__line-arrow{
+  width:1.05em;height:2.15em;flex:0 0 auto;color:var(--accent);
 }
 .hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .hero__trust{
@@ -421,15 +465,51 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
    снимке светлый борт и кирпичная стена. Без затемнения контраст
    белого по кирпичу около 2:1, текст не читался бы. */
 .hero__bg{
-  position:absolute;inset:0;z-index:0;
+  position:absolute;inset:0;
   /* Настоящее фото компании: белая Газель с грузчиками у часовой
      башни, солнечный день (1920×960). Полноразмерный кадр на всех
      экранах: cover заполняет секцию без полос и без растяжения —
      прежний mobile-кроп борта больше не нужен. */
-  background-image:url(assets/hero-main.webp);
+  background-image:url(assets/hero-photo.webp);
   background-size:cover;background-position:center;
   background-repeat:no-repeat;
 }
+/* Портрет диспетчера — звонок на номер компании.
+   На телефоне нажатие открывает набор номера, не форму. */
+.hero__call{
+  position:absolute;z-index:5;top:90px;right:24px;
+  width:auto;padding:0;border:0;background:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
+}
+.hero__call-face{
+  position:relative;display:block;width:min(18vw,96px);flex:0 0 auto;
+  border-radius:50%;overflow:visible;background:#e6e2dd;
+  border:3px solid #fff;box-shadow:0 10px 26px rgba(20,24,28,.42);
+}
+.hero__girl{
+  display:block;width:100%;height:auto;aspect-ratio:1;
+  border-radius:50%;object-fit:cover;object-position:center;
+}
+.hero__call-badge{
+  position:absolute;z-index:3;right:-2px;bottom:-2px;
+  width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#C6FF00;color:var(--black);border:2px solid #fff;
+}
+.hero__call-badge svg{width:16px;height:16px;display:block;fill:currentColor}
+.hero__call-label{
+  background:#00FF00;color:#000;
+  font-weight:800;font-size:12px;line-height:1;
+  padding:5px 9px;border-radius:999px;
+  box-shadow:none;
+}
+.hero__call-label.is-lit{box-shadow:0 0 16px 5px #00FF00}
+.hero__call:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:16px}
+@media (prefers-reduced-motion:reduce){
+  .hero__call-badge,.hero__call-label,.hero__promo::before{animation:none}
+}
+.hero__promo{display:none}
+@keyframes promo-rgb{to{transform:translate(-50%,-50%) rotate(1turn)}}
 .hero__bg::before{
   content:"";position:absolute;inset:0;
   /* Затемнение сделали равномерным и слабым: раньше слева стояло
@@ -438,14 +518,7 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
      Теперь слева 0.74, к центру спад до 0.26, а дальше фотография
      почти не тронута: машина, борт и башня видны целиком.
      Порог 4.5:1 проверяется замером по пикселям, tools/check_photo_contrast.js. */
-  background:linear-gradient(96deg,
-    rgba(43,49,56,0.74) 0%,
-    rgba(43,49,56,0.62) 26%,
-    rgba(43,49,56,0.46) 46%,
-    rgba(43,49,56,0.26) 58%,
-    rgba(43,49,56,0.10) 70%,
-    rgba(43,49,56,0.02) 82%,
-    rgba(43,49,56,0) 100%);
+  background:rgba(43,49,56,.42);
 }
 .hero__bg::after{
   content:"";position:absolute;inset:0;
@@ -453,8 +526,7 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
      прозрачную подложку ко всем стопам, поверх — прежнее
      затемнение снизу. Слой слабый: жёлтый номер на чёрном
      борту остаётся резким (проверяется замером). */
-  background:
-    linear-gradient(180deg,rgba(43,49,56,0.08) 0%,rgba(43,49,56,0.08) 26%,rgba(43,49,56,0.08) 62%,rgba(43,49,56,0.58) 100%);
+  background:none;
 }
 /* текст и кнопки — над фоном */
 .hero__txt{position:relative;z-index:2}
@@ -470,9 +542,7 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
      правый край блока и обрывался на границе x≈858px — поперёк фото
      шла вертикальная полоса. Теперь градиент гаснет внутри блока,
      и подложка не видна вовсе. */
-  background:radial-gradient(72% 100% at 22% 46%,
-    rgba(18,21,25,.78) 0%,rgba(18,21,25,.62) 45%,
-    rgba(18,21,25,.34) 72%,rgba(18,21,25,0) 100%);
+  background:none;
 }
 
 /* ── быстрый калькулятор ── */
@@ -509,167 +579,6 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
 .calc__det .row{display:flex;justify-content:space-between;gap:16px;padding:5px 0}
 .calc__det .row b{color:var(--white)}
 
-/* ── преимущества ── */
-.adv{background:var(--white)}
-.adv__grid{display:grid;gap:1px;background:var(--line);
-  grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
-.adv__i{background:var(--white);padding:clamp(22px,2.6vw,34px);display:grid;gap:8px;align-content:start}
-.adv__v{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1}
-.adv__v em{font-style:normal;color:var(--accent);-webkit-text-stroke:0}
-.adv__l{font-size:15px;color:var(--gray-1);line-height:1.45}
-.adv__ic{width:22px;height:22px;color:var(--black);margin-bottom:6px}
-
-/* ── сравнение ── */
-.cmp{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.cmp table{width:100%;border-collapse:collapse;min-width:560px}
-.cmp th,.cmp td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
-.cmp thead th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;
-  font-weight:700;color:var(--gray-1)}
-.cmp thead th:nth-child(2){color:var(--gray-1);font-weight:600}
-.cmp thead th:nth-child(3){color:var(--accent-ink);background:var(--accent)}
-.cmp tbody th{font-weight:500;color:var(--gray-1);width:26%}
-.cmp td:first-of-type{color:var(--gray-1)}
-.cmp td:last-child{font-weight:700;background:rgba(255,212,0,.09)}
-.cmp td:last-child svg{width:16px;height:16px;vertical-align:middle;color:var(--accent);margin-right:6px}
-.cmp tbody tr:last-child th,.cmp tbody tr:last-child td{border-bottom:0}
-
-/* ── услуги ── */
-.svcs{display:grid;gap:16px}
-.svc{
-  display:grid;gap:14px;padding:clamp(24px,2.8vw,36px);
-  /* Контур всегда тёмный: по просьбе рамка не должна зависеть
-     от наведения. Раньше при наведении она становилась
-     тёмной, в покое была почти незаметной. Теперь наведение
-     только приподнимает карточку и усиливает тень. */
-  border:1.5px solid var(--black);border-radius:var(--r-lg);
-  background:var(--white);
-  box-shadow:0 14px 34px rgba(43,49,56,0.22), 0 2px 6px rgba(43,49,56,0.08);
-  transition:transform .25s var(--ease),box-shadow .25s;
-}
-.svc:hover{transform:translateY(-4px);
-  box-shadow:0 22px 50px rgba(43,49,56,0.36), 0 4px 12px rgba(43,49,56,0.12)}
-.svc__n{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--accent-ink);
-  background:var(--accent);width:34px;height:34px;display:grid;place-items:center;border-radius:9px}
-.svc h3{font-size:clamp(20px,2.2vw,26px);letter-spacing:-.02em}
-.svc p{font-size:15px;color:var(--gray-1);line-height:1.55}
-.svc__list{display:flex;flex-wrap:wrap;gap:7px}
-.svc__list span{font-size:13px;font-weight:500;padding:6px 11px;border-radius:999px;
-  background:#F3F4F6;color:var(--gray-1)}
-.svc__go{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:700;
-  margin-top:auto;padding-top:6px}
-.svc__go svg{width:16px;height:16px;transition:transform .25s var(--ease)}
-.svc:hover .svc__go svg{transform:translateX(4px)}
-
-/* ── автопарк ── */
-.park{background:var(--black);color:var(--white)}
-.park__grid{display:grid;gap:16px}
-.car{
-  display:grid;gap:0;border:1px solid var(--line-d);border-radius:var(--r-lg);
-  overflow:hidden;background:#2F353C;
-  transition:border-color .25s,transform .25s var(--ease);
-}
-.car:hover{border-color:var(--accent);transform:translateY(-3px)}
-.car__ph{position:relative;aspect-ratio:16/10;background:#23282E;overflow:hidden}
-.car__ph img{width:100%;height:100%;object-fit:cover}
-/* Карточка без фотографии — не заглушка «фото не загружено»,
-   а часть дизайна: крупный номер жёлтым на графите. Человек
-   видит все восемь машин с характеристиками и ценой, а не семь
-   одинаковых серых прямоугольников. Как появится настоящее фото
-   в assets\cars, сборщик подставит его вместо этого блока. */
-.car__ph--type{
-  display:grid;place-items:center;position:relative;
-  background:#2F353C;min-height:150px;
-}
-/* Силуэт машины вместо фотографии. Схема типа, а не фото:
-   обещать конкретную Газель мы не можем — её у нас нет.
-   Силуэт белый, колёса жёлтые: та же палитра, третьего цвета нет.
-   Как появится настоящее фото в assets\cars, оно перекроет
-   силуэт — механизм подстановки прежний. */
-.car__ico{
-  width:clamp(96px,42%,140px);height:auto;display:block;
-  /* Иконка целиком жёлтая: раньше контур был белым, а жёлтыми
-     были только колёса. Цвет контура берётся из currentColor,
-     поэтому достаточно поменять его здесь — правило на колёса
-     в спрайте останется тем же. Прозрачность чуть поднята,
-     чтобы жёлтый на тёмном фоне был заметен. */
-  color:var(--accent);opacity:1;
-}
-/* Иконки машин по длине кузова: у 4,2 м и 5—6 м значок шире.
-   Ширины пропорциональны настоящей длине машины (4,9 : 6,1 : 7,1),
-   поэтому карточки сравнимы между собой. */
-/* Чтобы длинный значок не упирался в края карточки */
-.car__ph--type{padding:0 10px}
-
-/* Иконки машин: у всех одна высота, ширина складывается из
-   пропорций значка. Так ряд карточек ровный, а длина кузова
-   внутри значка остаётся разной — 3 м против 4,2 м против 5,2 м
-   видно глазом. Размер рисунка при этом не прыгает. */
-.car__ico{height:46px;width:auto;max-width:88%}
-@media (max-width:700px){.car__ico{height:42px}}
-
-/* Иконки машин. Задана одна высота для всех — 46px на
-   экране и 42px на телефоне. Ширина у каждой своя, считается из
-   пропорций рисунка: так ряд карточек ровный, а длина кузова
-   внутри значка остаётся разной — 3 м против 4,2 м против 5,2 м
-   видно глазом. Размер рисунка при этом не прыгает. */
-.car__ico--v-gazel3{width:74px}
-.car__ico--v-gazel42{width:90px}
-.car__ico--v-gazel56{width:104px}
-.car__ico--v-samosval{width:92px}
-.car__ico--v-evac{width:92px}
-.car__ico--v-manip{width:92px}
-.car__ico--v-vyshka{width:92px}
-@media (max-width:700px){
-  .car__ico--v-gazel3{width:67px}
-  .car__ico--v-gazel42{width:83px}
-  .car__ico--v-gazel56{width:95px}
-  .car__ico--v-samosval{width:84px}
-  .car__ico--v-evac{width:84px}
-  .car__ico--v-manip{width:84px}
-  .car__ico--v-vyshka{width:84px}
-}
-
-.car__ph--type img~.car__ico,.car__ph--type:has(img) .car__ico{display:none}
-.car__ph--type img{display:block;width:100%;height:100%;object-fit:cover}
-
-/* Содержимое карточки — по центру. Раньше название было слева,
-   характеристики разъезжались к краям (подпись влево, значение
-   вправо), цена слева: на телефоне между подписью и значением
-   получалась дыра шириной в пол-экрана. Теперь подпись и значение
-   стоят друг под другом в одной колонке, и глаз идёт ровно
-   сверху вниз по центру карточки.
-
-   Кнопку оставляем во всю ширину: нажатие крупное, это важнее
-   ровности. Центрируется только надпись на ней. */
-.car__body{padding:20px;display:grid;gap:14px;align-content:start;text-align:center}
-/* Название машины: крупнее прежнего и с жёлтым контуром.
-   paint-order: stroke fill — контур рисуется под заливкой и
-   остаётся ровно той толщины, какой задан. Без него контур лёг
-   бы поверх букв и утолщал их неравномерно. */
-.car__h{
-  font-size:23px;font-weight:800;letter-spacing:-.015em;
-  -webkit-text-stroke:1px var(--accent);paint-order:stroke fill;
-}
-@media (max-width:700px){.car__h{font-size:21px}}
-.car__spec{display:grid;gap:9px;justify-items:center}
-.car__spec div{display:grid;gap:2px;justify-items:center;font-size:14px}
-.car__spec dt{color:var(--gray-2)}
-.car__spec dd{margin:0;font-weight:600}
-.car__p{display:flex;align-items:baseline;justify-content:center;gap:8px;
-  padding-top:12px;border-top:1px solid var(--line-d)}
-/* надпись на кнопке — по центру, сама кнопка во всю ширину */
-.car__body .btn{justify-content:center;text-align:center}
-.car__p b{font-size:22px;font-weight:800;color:var(--accent);letter-spacing:-.02em}
-.car__p span{font-size:13px;color:var(--gray-2)}
-
-/* ── шаги ── */
-.steps{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
-  border-radius:var(--r-lg);overflow:hidden;grid-template-columns:repeat(3,minmax(0,1fr))}
-.step{background:var(--white);padding:clamp(24px,2.6vw,36px);display:grid;gap:10px;align-content:start}
-.step__n{font-size:14px;font-weight:800;color:var(--accent-ink)}
-.step h3{font-size:19px;letter-spacing:-.01em}
-.step p{font-size:14.5px;color:var(--gray-1);line-height:1.5}
-
 /* ── фотогалерея реальной работы ── */
 .work{background:var(--black);color:var(--white)}
 .work__grid{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -692,126 +601,6 @@ button[data-order-open]{border:0;font-family:inherit;cursor:pointer}
   display:flex;align-items:center;gap:10px}
 .biz__f svg{width:18px;height:18px;color:var(--accent-ink)}
 .biz__note{font-size:15px;color:var(--gray-1);max-width:52ch}
-
-/* ── политика конфиденциальности ──
-   Текст длинный, поэтому идёт колонкой: 70 знаков — строка,
-   которую реально можно читать. Без ограничения строки
-   растянулись бы на весь монитор. */
-.policy__doc{max-width:72ch;font-size:15.5px;line-height:1.65;color:var(--gray-1)}
-.policy__doc h3{font-size:19px;margin:26px 0 10px}
-.policy__doc h3:first-child{margin-top:0}
-.policy__doc p{margin:0 0 12px}
-.policy__doc ul{margin:0 0 12px;padding-left:22px}
-.policy__doc li{margin-bottom:6px}
-
-/* ── грузчики ──
-   Карточки повторяют секцию услуг, чтобы рядом с автопарком
-   смотрелись своими. Нижняя плашка — цена и кнопка. */
-.loaders .svcs{margin-top:6px}
-.loaders__note{
-  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
-  gap:18px;margin-top:26px;padding:20px 22px;
-  border:1px solid var(--line);border-radius:var(--r-lg);background:var(--white);
-}
-.loaders__note p{margin:0;max-width:62ch;font-size:14.5px;color:var(--gray-1)}
-/* Важная фраза в плашке грузчиков: подсвечиваем жёлтым,
-   чтобы глаз выхватывал её сразу. Жирный шрифт на сером
-   для этого не годится: цвет тот же, разница только в
-   толщине букв, а на телефоне она не читается. */
-.loaders__note .loaders__note-hi{
-  display:inline-block;margin:10px 0 0;padding:8px 14px;
-  background:var(--accent);color:var(--black);
-  font-size:15px;font-weight:700;border-radius:10px;
-}
-.loaders__note b{color:var(--black)}
-@media (max-width:600px){
-  .loaders__note{flex-direction:column;align-items:stretch;text-align:center}
-  .loaders__note .btn{width:100%}
-}
-
-/* ── помощник и иконки связи справа снизу ──
-   На телефоне панель «Позвонить / Оформить заказ» уже есть внизу,
-   поэтому кнопку телефона там прячем и поднимаем остальные три
-   над панелью, чтобы они не перекрывались. */
-.dock{position:fixed;right:20px;bottom:20px;z-index:1040;display:none}
-html.has-bot .dock{display:block}
-.dock__col{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
-.dock__b{
-  width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
-  box-shadow:0 8px 22px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.25);
-  transition:transform .2s var(--ease),filter .2s;
-  position:relative;
-}
-.dock__b:hover{transform:translateY(-2px) scale(1.04);filter:brightness(1.06)}
-.dock__b svg{width:26px;height:26px;fill:var(--white)}
-.dock__b--wa{background:#25D366}
-.dock__b--tg{background:#2AABEE}
-.dock__b--tel{background:var(--accent);border-color:var(--black)}
-.dock__b--tel svg{fill:var(--black)}
-.dock__b--max{background:var(--white);border-color:var(--black)}
-.dock__b--max svg{fill:var(--black);width:26px;height:26px}
-.dock__b--bot{background:var(--accent);border-color:var(--black);padding:0;overflow:hidden}
-.dock__avatar{width:42px;height:42px;object-fit:cover;border-radius:50%;display:block;pointer-events:none}
-
-/* Всплывающие подсказки при наведении слева от кнопки */
-.dock__tip{
-  position:absolute;right:calc(100% + 12px);top:50%;
-  transform:translateY(-50%) translateX(6px);
-  background:var(--black);color:var(--white);
-  padding:6px 12px;border-radius:8px;
-  font-size:13px;font-weight:600;white-space:nowrap;
-  pointer-events:none;opacity:0;visibility:hidden;
-  transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;
-  box-shadow:0 4px 16px rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.15);
-  z-index:10;
-}
-.dock__tip::after{
-  content:"";position:absolute;left:100%;top:50%;
-  transform:translateY(-50%);
-  border:5px solid transparent;border-left-color:var(--black);
-}
-.dock__b:hover .dock__tip{
-  opacity:1;visibility:visible;
-  transform:translateY(-50%) translateX(0);
-}
-
-.bot{
-  position:fixed;right:86px;bottom:20px;z-index:1050;
-  width:min(380px,calc(100vw - 32px));height:min(540px,72vh);
-  background:var(--white);border-radius:var(--r-lg);border:1px solid var(--line);
-  box-shadow:0 24px 60px rgba(0,0,0,.34);display:flex;flex-direction:column;overflow:hidden;
-}
-.bot[hidden]{display:none !important}
-.bot__head{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--black);color:var(--white)}
-.bot__head-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--accent);border:1.5px solid var(--accent);flex-shrink:0}
-.bot__ttl{font-weight:800;font-size:15px;line-height:1.25}.bot__ttl small{display:block;font-weight:400;font-size:12px;color:var(--gray-2);margin-top:2px}
-.bot__x{margin-left:auto;width:34px;height:34px;border-radius:10px;background:#3A4149;color:var(--white);font-size:20px;line-height:1;cursor:pointer;border:none;display:grid;place-items:center}
-.bot__x:hover{background:#414952}
-.bot__log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--white)}
-.bot__m{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.5}
-.bot__m--b{background:#F3F4F6;color:var(--black);align-self:flex-start;border-bottom-left-radius:4px}
-.bot__m--u{background:var(--accent);color:var(--black);align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
-.bot__m b{font-weight:800}
-.bot__m a{color:var(--black);font-weight:700;border-bottom:1.5px solid var(--accent)}
-.bot__m ul{margin:6px 0 0;padding-left:18px}
-.bot__m li{margin-bottom:3px}
-.bot__chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 14px 10px}
-.bot__chips:empty{display:none}
-.bot__chip{border:1.5px solid var(--black);background:var(--white);color:var(--black);border-radius:999px;padding:8px 13px;font-size:13.5px;font-weight:600;cursor:pointer;min-height:36px}
-.bot__chip:hover{background:var(--black);color:var(--white)}
-.bot__form{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
-.bot__in{flex:1;min-width:0;min-height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 13px;font-size:15px;font-family:inherit}
-.bot__in:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--black)}
-.bot__send{width:46px;min-height:46px;border-radius:12px;background:var(--accent);border:1.5px solid var(--black);cursor:pointer;display:grid;place-items:center}
-.bot__send svg{width:20px;height:20px;fill:var(--black)}
-
-@media (max-width:700px){
-  .dock{right:12px;bottom:86px;z-index:1090}
-  .dock__b{width:48px;height:48px}
-  .dock__tip{display:none}
-  .bot{right:12px;bottom:86px;width:calc(100vw - 24px);height:min(66vh,520px);z-index:1100}
-}
 
 /* ── галерея компании ── */
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -919,24 +708,35 @@ html.has-bot .dock{display:block}
   padding:8px 12px calc(8px + env(safe-area-inset-bottom));
   box-shadow:0 -6px 24px rgba(43,49,56,1);
 }
-.mobar__in{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;max-width:var(--maxw);margin:0 auto}
-.mobar .btn{min-height:52px;padding:0 12px;font-size:15px}
-
-/* ── кнопка озвучки ── */
-.sayrow{display:flex;gap:10px;margin:0 0 16px}
-.say{width:38px;height:38px;flex:0 0 38px;border-radius:50%;
-  display:grid;place-items:center;background:#F3F4F6;border:1px solid var(--line);
-  color:var(--black);transition:background .2s,border-color .2s,transform .2s}
-.say:hover{background:var(--accent);border-color:var(--accent)}
-.say:active{transform:scale(.92)}
-.say svg{width:17px;height:17px}
-.say .say__stop{display:none}
-.say.is-on{background:var(--accent);border-color:var(--accent)}
-.say.is-on .say__stop{display:block}
-.say.is-on .say__play{display:none}
-.sec--dark .say,.hero .say{background:#3A4149;border-color:var(--line-d);color:var(--white)}
-.sec--dark .say:hover,.hero .say:hover{background:var(--accent);color:var(--accent-ink)}
-html.no-speech .sayrow{display:none}
+.mobar__in{max-width:var(--maxw);margin:0 auto}
+.mobar .btn{width:100%;min-height:70px;padding:0 18px;font-size:22px;font-weight:800;gap:12px}
+.mobar .btn svg{width:28px;height:28px;flex:0 0 28px}
+.news{
+  margin-bottom:10px;padding:0;border-radius:0;
+  background:transparent;color:#fff;text-align:left;
+  max-height:min(62vh,460px);overflow:auto;
+  display:flex;flex-direction:column;gap:12px;
+}
+.news[hidden]{display:none!important}
+.news__item{
+  padding:14px 14px 16px;border-radius:18px;
+  background:#2B3138;
+  box-shadow:0 8px 22px rgba(20,24,28,.18);
+}
+.news__head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.news__date{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFD400}
+.news__ttl{margin:6px 0 0;font-size:16px;font-weight:800;line-height:1.25}
+.news p{margin:8px 0 0;font-size:14px;line-height:1.45;color:rgba(255,255,255,.9)}
+.news .say{
+  width:44px;height:44px;flex:0 0 44px;margin-top:2px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#3A4149;border:1px solid rgba(255,255,255,.2);color:#fff;
+}
+.news .say svg{width:18px;height:18px}
+.news .say .say__stop{display:none}
+.news .say.is-on{background:#FFD400;border-color:#FFD400;color:#2B3138}
+.news .say.is-on .say__play{display:none}
+.news .say.is-on .say__stop{display:block}
 
 /* ── появление блоков: только один раз, без повтора ──
    Текст выезжает сбоку: слева направо, поочерёдно с обеих
@@ -961,13 +761,8 @@ html.no-speech .sayrow{display:none}
    занимал экран, а не пустое место. Поэтому высоту задаём явно.
    ============================================================ */
 .hero{min-height:clamp(560px,78vh,700px)}
-@media (min-width:1101px){.hero{min-height:clamp(600px,80vh,740px)}}
-/* Сетка автопарка на широких экранах. Раньше колонки задавались
-   только узким экранам, поэтому на мониторе сетка оставалась
-   одноколоночной: карточка 1184×1074px, секция 8233px = 8,2
-   экрана. Здесь задаём колонки явно. */
-@media (min-width:1101px){.park__grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (min-width:901px) and (max-width:1100px){.park__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:601px){.hero{min-height:100vh}}
+@media (min-width:1101px){.hero{min-height:100vh}}
 @media (max-width:1100px){
   .nav{display:none}
   .hdr-tel{display:flex}
@@ -975,21 +770,15 @@ html.no-speech .sayrow{display:none}
   .calc__row{grid-template-columns:repeat(2,minmax(0,1fr));}
   .calc__cta{grid-column:1/-1}
   .calc__total{justify-items:start}
-  .svcs{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .park__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .revs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .biz__grid{grid-template-columns:1fr 1fr}
   .foot__grid{grid-template-columns:1fr 1fr}
 }
 /* ссылки-подписи услуг и политика: по ним жмут, поднимаем до 44px */
-.svc__go{min-height:44px;align-items:center}
 .foot__bot a{display:inline-flex;align-items:center;min-height:44px}
 @media (max-width:860px){
   .hdr-tel{display:none}
-  .burger{margin-left:auto}
   .hdr-cta{display:flex}
-  .steps{grid-template-columns:1fr}
-  .adv__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:600px){
   /* Текст на фото больше не живёт, поэтому затемняющие плёнки
@@ -1013,7 +802,6 @@ html.no-speech .sayrow{display:none}
      сжиматься может бренд — он широкий. Кнопка меню, наоборот,
      обязана остаться 44px, поэтому фиксируем ей размер явно. */
   .topbar__in .brand{min-width:0}
-  .burger{width:44px;min-width:44px}
   .brand__sub{display:none}
 
   /* первый экран на телефоне: заголовок, цена, кнопки, фото */
@@ -1025,7 +813,7 @@ html.no-speech .sayrow{display:none}
   .hero__h1{font-size:clamp(25px,calc(9.1vw - 3.6px),32px);line-height:1.12}
   .hero__price{font-size:clamp(26px,7.5vw,34px);margin-top:20px}
   .hero__sub{font-size:15.5px}
-  .hero__types span{font-size:12px;padding:7px 12px}
+  .hero__types-lead{font-size:17px;letter-spacing:.06em;padding:12px 16px}
   .hero__cta{gap:9px;margin-top:24px}
   .hero__cta .btn{flex:1 1 100%;min-height:54px;padding:0 18px;font-size:15.5px}
   /* Блок доверия на телефоне: зазор между пунктами 18 → 14px.
@@ -1053,7 +841,6 @@ html.no-speech .sayrow{display:none}
   .hero__cta .btn{flex:1 1 100%}
   .hero__trust{justify-content:center}
   .hero__photo{min-height:190px}
-  .say{width:44px;height:44px;flex-basis:44px}
 
   /* калькулятор становится вертикальным */
   .calc__row{grid-template-columns:1fr;padding:18px;gap:14px}
@@ -1062,13 +849,7 @@ html.no-speech .sayrow{display:none}
   .calc__det .row{font-size:13.5px}
   .stepper{min-height:52px}
 
-  .adv__grid{grid-template-columns:1fr 1fr}
-  .adv__i{padding:18px 16px}
-  .adv__v{font-size:clamp(26px,8vw,34px)}
-  .adv__l{font-size:13.5px}
 
-  .svcs{grid-template-columns:1fr}
-  .park__grid{grid-template-columns:minmax(0,1fr)}
   /* длинные подписи вроде «Отзывы на Яндекс Картах (4,8 ★, 191
      оценка)» или «Рассчитать перевозку для бизнеса» не
      помещались в 320px. Правило общее для всех кнопок в
@@ -1086,14 +867,13 @@ html.no-speech .sayrow{display:none}
   .work__grid{grid-template-columns:1fr}
   .work__i:first-child{grid-column:auto;aspect-ratio:4/3}
   .work__i:not(:first-child){aspect-ratio:4/3}
-  .cmp th,.cmp td{padding:12px 13px}
 
   .fin__cta .btn{flex:1 1 100%}
   .fin__tel{font-size:28px}
 
   /* нижняя панель: она же освобождает место у плавающих кнопок */
   .mobar{display:block}
-  body{padding-bottom:68px}
+  body{padding-bottom:96px}
   .to-top{display:none}
 
   .foot{padding-bottom:20px}
@@ -1159,6 +939,99 @@ html.no-speech .sayrow{display:none}
 .callmodal__done b{display:block;font-size:20px;margin-bottom:6px}
 .callmodal__done p{font-size:15px;margin-bottom:14px}
 
+/* Если компьютер не умеет открыть набор номера, портрет не должен
+   молчать: показываем номер и кнопку «Набрать». На телефоне набор
+   уводит страницу в фон, и эта карточка не появляется. */
+.dialsheet{
+  position:fixed;inset:0;z-index:1400;
+  display:grid;place-items:end center;
+  padding:16px 16px 96px;
+  background:rgba(20,24,28,.55);
+}
+.dialsheet[hidden]{display:none!important}
+
+/* Новое поле под островками. Выезжает в потоке страницы, не окном. */
+.islandshot{
+  box-sizing:border-box;
+  display:grid;grid-template-rows:0fr;
+  width:min(100%,480px);margin:0 auto;
+  transition:grid-template-rows .72s cubic-bezier(.22,1,.36,1);
+}
+.islandshot.is-open{grid-template-rows:1fr;margin-top:12px}
+.islandshot__clip{overflow:hidden;min-height:0}
+.islandshot__card{
+  background:#353C44;color:var(--white);
+  border:1px solid #9AD4FF;border-radius:22px;
+  padding:12px;
+}
+.islandshot__frame{
+  position:relative;border-radius:16px;overflow:hidden;
+  background:#23282E;
+  padding:14px 16px 16px;
+}
+.islandshot__wait{
+  display:block;margin:0;
+  font-size:14px;font-weight:500;line-height:1.45;
+  color:rgba(255,255,255,.86);text-align:left;white-space:normal;
+}
+.islandshot__name{
+  margin:12px 4px 2px;text-align:center;
+  font-size:16px;font-weight:700;line-height:1.3;
+}
+.hero__types .islandshot{
+  flex:1 1 100%;width:100%;max-width:100%;min-width:0;min-height:0;
+  margin:0;padding:0;
+}
+.hero__types .islandshot.is-open{margin-top:0}
+.hero__types li:has(.islandshot){
+  flex-direction:column;align-items:stretch;
+  overflow:hidden;border-radius:26px;
+}
+.hero__types li .islandshot{flex:0 0 auto;width:100%;max-width:100%;min-height:0;margin:0;padding:0}
+.hero__types li .islandshot__card{
+  border:0;border-radius:0;box-shadow:none;
+  padding:0;background:transparent;
+}
+.hero__types li .islandshot__frame{
+  border-radius:0;
+  border-top:1px solid rgba(154,212,255,.35);
+  background:#2A3036;
+  opacity:0;
+  transition:opacity .55s ease;
+}
+.hero__types li .islandshot.is-open .islandshot__frame{opacity:1}
+.hero__types li .islandshot__name{display:none}
+.hero__types li .islandshot__wait{color:rgba(255,255,255,.88);letter-spacing:0}
+.hero__type{transition:background .45s ease}
+.hero__type.is-on{background:rgba(154,212,255,.16)}
+@media (prefers-reduced-motion:reduce){
+  .islandshot,.islandshot__frame,.hero__type{transition:none}
+  .hero__types li{animation:none}
+}
+.dialsheet__card{
+  position:relative;width:min(360px,100%);
+  background:var(--white);color:var(--black);
+  border-radius:20px;padding:22px 18px 16px;text-align:center;
+  box-shadow:0 24px 60px rgba(0,0,0,.4);
+}
+.dialsheet__x{
+  position:absolute;top:10px;right:10px;width:36px;height:36px;
+  border-radius:10px;background:#F3F4F6;color:var(--black);
+  font-size:20px;line-height:1;display:grid;place-items:center;
+}
+.dialsheet__ttl{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.dialsheet__num{
+  display:block;margin:12px 0 14px;
+  font-size:28px;font-weight:800;letter-spacing:-.02em;color:var(--black);
+  user-select:all;-webkit-user-select:all;
+}
+.dialsheet__go{
+  display:flex;align-items:center;justify-content:center;
+  min-height:52px;border-radius:999px;
+  background:#00FF00;color:#000;font-weight:800;font-size:16px;
+  box-shadow:0 0 8px #00FF00,0 0 20px rgba(0,255,0,.75);
+}
+
   /* ============================================================
      МОБИЛЬНАЯ ВЕРСИЯ: ДОСТУПНОСТЬ И УДОБСТВО
      Три проблемы, замеренные на экране 390px:
@@ -1174,62 +1047,104 @@ html.no-speech .sayrow{display:none}
     /* ── шапка без жёлто-чёрной шахматки: однотонный графит,
        остаются только логотип, кнопка заказа и бургер ── */
     .topbar,.topbar.is-stuck{background:var(--black)}
-    /* бургер был чёрным квадратом — на графите он пропадал бы */
-    .topbar .burger{background:transparent}
 
     /* ── фото на первом месте: текст больше не лежит на фото ──
        Раньше текст висел поверх фотографии с тёмной плёнкой.
        Теперь первым экраном идёт сама фотография (видна целиком,
        без надписей поверх), а заголовок, цена и кнопки — под ней,
        на графитовом фоне. */
-    .hero__in{display:flex;flex-direction:column;padding:64px 0 0}
+    .hero{min-height:0;overflow:visible}
+    .hero__in{display:flex;flex-direction:column;padding:64px 0 0;gap:0}
     /* Фото целиком, без обрезки. Присланный владельцем кадр
        (1446×1087) — тот же сюжет без графитовой панели.
        contain вписывает его по ширине экрана целиком, блок по
        пропорции фото — без пустых полей. */
-    .hero__bg{order:-1;position:relative;inset:auto;width:100%;
+    .hero__bg{order:-1;position:relative;inset:auto;z-index:auto;width:100%;
       aspect-ratio:1446/1087;height:auto;
       background-image:url(assets/hero-photo.webp);
       background-size:contain;background-position:center top;
       background-color:var(--black)}
     /* плёнки-затемнения больше не нужны: текста на фото нет */
     .hero__bg::before,.hero__bg::after,.hero__txt::before{content:none}
-    .hero__txt{padding:22px var(--pad) 30px}
+    /* Портрет — в пустом небе, выше, у верхней кромки кадра. */
+    /* Портрет едет вместе с экраном, когда страницу листают вниз. */
+    .hero__call{position:fixed;top:78px;right:8px;z-index:1060}
+    .hero__call-face{width:min(22vw,88px);border-width:2px}
+    .hero__call-badge{width:26px;height:26px}
+    .hero__call-badge svg{width:14px;height:14px}
+    .hero__call-label{font-size:11px;padding:4px 7px}
+    .hero__promo{
+      display:block;position:absolute;z-index:4;
+      top:auto;bottom:0;left:50%;
+      transform:translate(-50%,50%);
+      width:max-content;max-width:calc(100% - 44px);
+      padding:3px;border-radius:999px;overflow:hidden;
+      box-shadow:0 10px 22px rgba(0,0,0,.28);
+    }
+    .hero__promo::before{
+      content:"";position:absolute;left:50%;top:50%;
+      width:220%;aspect-ratio:1;
+      background:conic-gradient(from 0deg,#ff2d2d,#ffd400,#39ff14,#2ad4ff,#8a5cff,#ff2d2d);
+      transform:translate(-50%,-50%);
+      animation:promo-rgb 2.8s linear infinite;
+    }
+    .hero__promo span{
+      position:relative;z-index:1;
+      display:flex;align-items:center;justify-content:center;
+      min-height:0;padding:4px 18px;border-radius:999px;
+      background:#353C44;color:#fff;
+      font-size:16px;font-weight:650;line-height:1;
+      letter-spacing:-.01em;white-space:nowrap;
+    }
+    .hero__txt{
+      display:flex;flex-direction:column;align-items:stretch;
+      padding:32px 6px 30px;
+      /* Пустой графит под фото — место, где был текст первого экрана. */
+      min-height:569px;
+    }
+    .hero__line{
+      gap:6px;
+      font-size:clamp(27px, calc((100vw - 52px) / 8.933), 42px);
+      line-height:1.15;
+    }
+    .hero__line span{white-space:normal;min-width:0}
+    /* Островки одной ширины, с одинаковым отступом от краёв. */
+    .hero__types{
+      position:static;order:0;box-sizing:border-box;
+      width:100%;margin:40px 0 0;padding:0 16px;
+    }
+    .hero__types li,
+    .hero__types li:first-child,
+    .hero__types li.hero__types-wide{
+      flex:1 1 100%;width:100%;max-width:100%;min-width:0;
+      white-space:nowrap;
+      font-size:15px;font-weight:650;line-height:1.2;letter-spacing:-.01em;
+      padding:0;min-height:0;
+    }
+    .hero__types .hero__type,
+    .hero__types li:first-child .hero__type{
+      min-height:48px;padding:12px 16px;
+    }
+    .hero__txt > .islandshot{width:100%;padding:0 16px}
 
     /* ── шапка: всё должно помещаться в 320–390px ── */
     .topbar__in{padding:0 12px;gap:8px}
-    .topbar .brand{padding:6px 10px 6px 7px;margin-left:-7px;border-radius:11px}
-    .brand__mark{width:26px;height:26px;flex:0 0 26px}
-    .brand__name{font-size:15.5px}
-    .btn-blink-order{font-size:12px;min-height:40px;padding:8px 10px;margin-right:2px}
-    .burger{width:42px;min-width:42px}
+    .topbar .brand{padding:8px 14px 8px 8px;margin-left:-7px;border-radius:14px}
+    .brand__mark{width:36px;height:36px;flex:0 0 36px;border-radius:12px}
+    .brand__name{font-size:20px}
+    .btn-blink-order{font-size:12px;min-height:40px;padding:8px 10px;margin-left:12px;margin-right:0}
 
     /* ── цена в хиро: столбиком, без переносов ── */
     .hero__price{flex-direction:column;align-items:center;gap:6px;margin-top:18px}
     .hero__price span{white-space:nowrap}
     .hero__price small{max-width:30ch}
 
-    /* ── кнопки связи: горизонтальный ряд над нижней панелью,
-          а не столбик через весь экран ── */
-    .dock{right:12px;bottom:78px;z-index:1085}
-    .dock__col{flex-direction:row;gap:8px}
-    .dock__b{width:44px;height:44px}
-    .dock__b svg{width:22px;height:22px}
-    .dock__avatar{width:38px;height:38px}
 
-    /* меню поверх кнопок связи, но ПОД шапкой — иначе бургер
-       (он же крестик) уходит под меню и меню не закрыть */
-    .mobnav{z-index:1095}
 
-    /* ── мобильное меню: крупнее зоны нажатия, стрелка-подсказка.
-       Стрелки только на пунктах меню, не на кнопках внизу ── */
-    .mobnav > a{display:flex;align-items:center;justify-content:space-between;
-      min-height:60px;padding:12px 0}
-    .mobnav > a::after{content:"→";color:var(--accent);font-weight:800;font-size:22px}
 
     /* нижняя панель: чуть выше кнопки и без синего вспыхивания
        при касании на Android */
-    .mobar .btn{min-height:54px}
+    .mobar .btn{min-height:70px;font-size:22px}
     a,button{-webkit-tap-highlight-color:transparent}
   }
   /* совсем узкие экраны (320–359px): кнопку заказа из шапки убираем —
@@ -1237,16 +1152,13 @@ html.no-speech .sayrow{display:none}
   @media (max-width:359px){
     .topbar .btn-blink-order{display:none}
   }
-  /* нижняя панель на узких экранах: «Оформить заказ» не влезал
-     в свою колонку — текст обрезался. Ужимаем шрифт и поля */
   @media (max-width:380px){
-    .mobar__in{gap:8px}
-    .mobar .btn{font-size:13px;padding:0 8px;gap:6px}
-    .mobar .btn svg{width:16px;height:16px}
-  }
+    .mobar .btn{font-size:20px;padding:0 14px;gap:10px}
+    .mobar .btn svg{width:24px;height:24px}
+}
 
 @media print{
-  .topbar,.mobar,.mobnav,.bot,.to-top,.sayrow{display:none}
+  .topbar,.mobar,.bot,.to-top{display:none}
   .sec{page-break-inside:avoid}
   .rv{opacity:1;transform:none}
 }
@@ -1291,58 +1203,20 @@ html.no-speech .sayrow{display:none}
     <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M5 12h14M13 6l6 6-6 6"/>
     </symbol>
-    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 12.5 9 18 20 6.5"/>
-    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
     <symbol id="i-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M11 5 6.5 9H3v6h3.5L11 19z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>
     </symbol>
     <symbol id="i-stop" viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/></symbol>
-    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></symbol>
-    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
     <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4"/><path d="M9 12h6M9 16h6"/>
-    </symbol>
-    <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/>
     </symbol>
     <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>
     </symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 2 4 5.5V12c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V5.5z"/><path d="m9 12 2 2 4-4"/>
-    </symbol>
-    <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="m12 2 9 5v10l-9 5-9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/>
-    </symbol>
-    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6M17.5 14.5A6.5 6.5 0 0 1 21.5 20"/>
-    </symbol>
     <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="5.5" cy="5.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><path d="M8 5.5h6a4 4 0 0 1 0 8H10a4 4 0 0 0 0 8h6"/>
     </symbol>
-    <symbol id="i-spec" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M2 20h20"/><path d="M5 20v-5l4-3 3 2v6"/><path d="M14 20v-8h6v8"/><circle cx="9" cy="17" r="1.5"/>
-    </symbol>
-    <!-- Силуэты машин для карточек автопарка: схема типа, не фото.
-
-     Рисуем по настоящему виду. «Газель» — это ГАЗ-3302:
-     капотная компоновка с коротким капотом и двухдверной кабиной,
-     привод задний, сбоку видно одно заднее колесо, а отсек 3 м —
-     низкий борт высотой 380 мм. Прежние силуэты рисовали кабину без
-     капота и два задних колеса: то есть не Газель.
-
-     Все семь машин — капотные грузовики одного семейства, как в
-     действительности: ГАЗ-3307 самосвал и спецтехника тоже на
-     этой базе. -->
-    <style>.car__ico .w{fill:#FFD400;stroke:none}</style>
-    <symbol id="v-gazel3" viewBox="0 0 48 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Газель 3 метра"><path d="M2 21H46"/><path d="M2 21V13.5L6 9.5H19"/><path d="M19 4V21"/><path d="M19 4H46V21"/><circle class="w" cx="11" cy="24.6" r="3.6"/><circle class="w" cx="38" cy="24.6" r="3.6"/></symbol>
-    <symbol id="v-gazel42" viewBox="0 0 59 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Газель 4,2 метра"><path d="M2 21H57"/><path d="M2 21V13.5L6 9.5H19"/><path d="M19 4V21"/><path d="M19 4H57V21"/><circle class="w" cx="11" cy="24.6" r="3.6"/><circle class="w" cx="49" cy="24.6" r="3.6"/></symbol>
-    <symbol id="v-gazel56" viewBox="0 0 68 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Газель 5–6 метров"><path d="M2 21H66"/><path d="M2 21V13.5L6 9.5H19"/><path d="M19 4V21"/><path d="M19 4H66V21"/><circle class="w" cx="11" cy="24.6" r="3.6"/><circle class="w" cx="58" cy="24.6" r="3.6"/></symbol>
-    <symbol id="v-samosval" viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Самосвал"><path d="M3 22V15h12v7"/><path d="M15 22V6h10v16"/><path d="M15 15h10"/><path d="M27 22 30 13 54 6 57 15 33 22z"/><path d="M25 22 33 17"/><circle class="w" cx="10" cy="24" r="3.4"/><circle class="w" cx="50" cy="24" r="3.4"/></symbol>
-    <symbol id="v-evac" viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Эвакуатор"><path d="M3 22V15h12v7"/><path d="M15 22V6h10v16"/><path d="M15 15h10"/><path d="M27 22V18h26"/><path d="M29 14.6v-2.2c0-.6.3-1.2.9-1.5l1.5-.7l2-2.3c.4-.5 1-.8 1.6-.8h3c.7 0 1.3.4 1.7 1l1.7 2.4l1.3.7c.6.3.9.9.9 1.6v1.8"/><path d="M29 12.4h14.6"/><circle class="w" cx="32.6" cy="16.2" r="1.8"/><circle class="w" cx="40.4" cy="16.2" r="1.8"/><path d="M53 18 59 11"/><path d="M53 22 59 15"/><circle class="w" cx="10" cy="24" r="3.4"/><circle class="w" cx="46" cy="24" r="3.4"/></symbol>
-    <symbol id="v-manip" viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Манипулятор"><path d="M3 22V15h12v7"/><path d="M15 22V6h10v16"/><path d="M15 15h10"/><path d="M27 22h32"/><path d="M34 22V19h7v3"/><path d="M38 19 48 9 56 12"/><path d="M56 12v8c0 2-3 2-3 4"/><circle class="w" cx="10" cy="24" r="3.4"/><circle class="w" cx="48" cy="24" r="3.4"/></symbol>
-    <symbol id="v-vyshka" viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Автовышка"><path d="M3 22V15h12v7"/><path d="M15 22V6h10v16"/><path d="M15 15h10"/><path d="M27 22h30"/><path d="M33 22v5M50 22v5"/><path d="M37 22 45 12"/><path d="M42 5h14v8H42z"/><path d="M56 9h6"/><circle class="w" cx="10" cy="24" r="3.4"/><circle class="w" cx="48" cy="24" r="3.4"/></symbol>
   </defs>
 </svg>
 
@@ -1351,12 +1225,7 @@ html.no-speech .sayrow{display:none}
 <header class="topbar" id="topbar">
   <div class="topbar__in">
     <a class="brand" href="#top" aria-label="Грузилкин — на главную">
-      <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <rect x="1" y="1" width="38" height="38" rx="11" fill="#111111"/>
-        <rect x="8" y="13" width="15" height="11" rx="2" fill="#FFD400"/>
-        <path d="M24 17h4.6l3.4 3.2V24H24z" fill="#FFFFFF" fill-opacity=".55"/>
-        <circle cx="13" cy="28" r="2.6" fill="#FFD400"/><circle cx="27" cy="28" r="2.6" fill="#FFFFFF" fill-opacity=".55"/>
-      </svg>
+      <img class="brand__mark" src="assets/brand-logo.png" width="191" height="186" alt="">
       <span>
         <span class="brand__name">ГРУЗИЛКИН</span>
         <span class="brand__sub">Грузовое такси · Оренбург</span>
@@ -1375,107 +1244,52 @@ html.no-speech .sayrow{display:none}
     <a class="hdr-tel" href="tel:+73532432424">
       <svg aria-hidden="true"><use href="#i-phone"/></svg>8 (3532) 43-24-24
     </a>
-    <button type="button" class="btn-blink-order" id="callOpen" aria-label="Заказать звонок — перезвоним и примем заказ">
+    <button type="button" class="btn-blink-order" id="callOpen" data-call-open aria-label="Заказать звонок — перезвоним и примем заказ">
       Заказать звонок
     </button>
 
-    <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobnav">
-      <span></span>
-    </button>
   </div>
 </header>
 
-<div class="mobnav" id="mobnav" aria-hidden="true">
-  <a href="#services">Услуги</a>
-  <a href="#park">Автопарк</a>
-  <a href="#calc">Цены</a>
-  <a href="#biz">Для бизнеса</a>
-  <a href="#reviews">Отзывы</a>
-  <a href="#contacts">Контакты</a>
-  <div class="mobnav__foot">
-    <a class="btn btn--main" href="tel:+73532432424">
-      <svg aria-hidden="true"><use href="#i-phone"/></svg>8 (3532) 43-24-24
-    </a>
-    <a class="btn btn--ghost btn--order" href="#calc" >Оформить заказ</a>
-  </div>
 </div>
 
       <section class="sec hero" id="hero">
   <div class="hero__in">
+    <div class="hero__bg">
+      <a class="hero__call" href="tel:+73532432424" aria-label="Позвонить 8 (3532) 43-24-24">
+        <span class="hero__call-face">
+          <img class="hero__girl" src="assets/dispatcher.webp" width="1024" height="1024" alt="">
+          <span class="hero__call-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1l-2.2 2.2z"/></svg>
+          </span>
+        </span>
+        <span class="hero__call-label">Позвонить</span>
+      </a>
+      <div class="hero__promo"><span>Скидки и акции</span></div>
+    </div>
     <div class="hero__txt">
-      <div class="hero__eyebrow">Грузовое такси в Оренбурге</div>
-      <h1 class="hero__h1">
-        <span class="word">Газель</span> <span class="word">с</span> <span class="word">грузчиками</span>
-      </h1>
-      <div class="hero__price">
-        <span>от 1 800 ₽</span><small>в час, первый час по городу</small>
+      <p class="hero__line">
+        <svg class="hero__line-arrow" viewBox="0 0 32 56" aria-hidden="true"><path fill="currentColor" d="M11 2h10v26h8L16 54 3 28h8z"/></svg>
+        <span>У нас вы сможете заказать</span>
+        <svg class="hero__line-arrow" viewBox="0 0 32 56" aria-hidden="true"><path fill="currentColor" d="M11 2h10v26h8L16 54 3 28h8z"/></svg>
+      </p>
+      <ul class="hero__types">
+        <li><a class="hero__type" href="gazeli.html">Газели от 3 до 6.2 метров</a></li>
+        <li class="hero__types-wide"><a class="hero__type" href="gruzchiki.html">Грузчиков и сборщиков мебели</a></li>
+        <li><a class="hero__type" href="pereezd.html">Междугородний переезд под ключ</a></li>
+        <li><a class="hero__type" href="takelazh.html">Такелажные работы</a></li>
+        <li><a class="hero__type" href="stroymaterialy.html">Доставка стройматериалов</a></li>
+      </ul>
+      <div class="islandshot" id="islandShot">
+        <div class="islandshot__clip">
+          <div class="islandshot__card">
+            <div class="islandshot__frame">
+              <p class="islandshot__wait" id="islandShotText"></p>
       </div>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
-      <p class="hero__sub">Подача от 15 минут · Работаем 8:30 — 23:30, перевозки бывают и ночные</p>
-      <div class="hero__types">
-        <span>Газели 3–6 м</span><span>Спецтехника</span><span>Самосвалы</span><span>Фуры</span>
+            <p class="islandshot__name" id="islandShotName"></p>
       </div>
-      <div class="hero__cta">
-        <button type="button" class="btn btn--main btn--order" data-order-open>
-          Оформить заказ
-          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
-        </button>
-        <a class="btn btn--on-dark" href="#calc" >Рассчитать заказ</a>
       </div>
-      <div class="hero__trust">
-        <span><i></i>100+ машин</span>
-        <span><i></i>С 2009 года</span>
-        <span><i></i>Безнал с НДС и без</span>
-        <span><i></i>Бесплатная страховка груза</span>
       </div>
-    </div>
-
-    <!-- Фон первого экрана: настоящая машина компании у
-         часовой башни. Снимок затемняется слева направо, чтобы
-         заголовок и кнопки читались, а машина оставалась видна. -->
-    <div class="hero__bg" role="img"
-         aria-label="Белая Газель службы Грузилкин у часовой башни в Оренбурге, грузчики грузят коробки, солнечный день"></div>
-  </div>
-</section>
-
-<!-- ══════════ УСЛУГИ ══════════ -->
-<section class="sec" id="services">
-  <div class="wrap">
-    <div class="shead">
-      <span class="eyebrow">Услуги</span>
-      <h2>Четыре направления</h2>
-      <p>Не пятнадцать одинаковых карточек, а четыре задачи, которые мы действительно решаем.</p>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
-    </div>
-
-    <div class="svcs">
-      <article class="svc" onclick="location.href='#calc'" style="cursor:pointer">
-        <div class="svc__n">01</div>
-        <h3>Грузовое такси</h3>
-        <p>Газели 3–6 метров по городу и области. Можно с грузчиками или без.</p>
-        <div class="svc__list"><span>Газель 3 м</span><span>Газель 4,2 м</span><span>Газель 6 м</span></div>
-        </article>
-
-      <article class="svc">
-        <div class="svc__n">02</div>
-        <h3>Переезды</h3>
-        <p>Квартирные, офисные, дачные. Разбор мебели, упаковка и расстановка включены.</p>
-        <div class="svc__list"><span>Квартира</span><span>Офис</span><span>Дача</span></div>
-        </article>
-
-      <article class="svc">
-        <div class="svc__n">03</div>
-        <h3>Спецтехника</h3>
-        <p>Манипуляторы, эвакуаторы, автовышки, самосвалы. Работаем на высоте и с негабаритом.</p>
-        <div class="svc__list"><span>Манипулятор</span><span>Автовышка</span><span>Эвакуатор</span></div>
-        </article>
-
-      <article class="svc">
-        <div class="svc__n">04</div>
-        <h3>Перевозки по России</h3>
-        <p>Догруз попутными машинами, междугородние перевозки и фуры.</p>
-        <div class="svc__list"><span>Догруз</span><span>Междугородние</span><span>Фуры</span></div>
-        </article>
     </div>
   </div>
 </section>
@@ -1486,7 +1300,6 @@ html.no-speech .sayrow{display:none}
     <div class="shead">
       <span class="eyebrow">Цены</span>
       <h2>Сколько стоит перевозка?</h2>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
     </div>
 
     <div class="calc__row">
@@ -1541,266 +1354,10 @@ html.no-speech .sayrow{display:none}
   </div>
 </section>
 
-<!-- ══════════ ПРЕИМУЩЕСТВА ══════════ -->
-<section class="sec adv" id="adv">
-  <div class="wrap">
-    <div class="shead shead--mid">
-      <span class="eyebrow">Почему нас выбирают</span>
-      <h2>Свой автопарк, а не поиск машины по телефону</h2>
-      <p>Каждый грузчик и водитель — в штате. Машина приезжает от 15 минут, тариф фиксированный до начала работы.</p>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
-    </div>
-
-    <div class="adv__grid">
-      <div class="adv__i">
-        <svg class="adv__ic" aria-hidden="true"><use href="#i-truck"/></svg>
-        <div class="adv__v">100<sup>+</sup></div>
-        <div class="adv__l">машин и спецтехники в своём парке</div>
-      </div>
-      <div class="adv__i">
-        <svg class="adv__ic" aria-hidden="true"><use href="#i-clock"/></svg>
-        <div class="adv__v">17 лет</div>
-        <div class="adv__l">работаем в Оренбурге с 2009 года</div>
-      </div>
-      <div class="adv__i">
-        <svg class="adv__ic" aria-hidden="true"><use href="#i-spec"/></svg>
-        <div class="adv__v">13 видов</div>
-        <div class="adv__l">от Газели 3 м до фуры и автовышки</div>
-      </div>
-      <div class="adv__i">
-        <svg class="adv__ic" aria-hidden="true"><use href="#i-route"/></svg>
-        <div class="adv__v">15 мин</div>
-        <div class="adv__l">подача газели по городу</div>
-      </div>
-      <div class="adv__i">
-        <svg class="adv__ic" aria-hidden="true"><use href="#i-users"/></svg>
-        <div class="adv__v">от 900 ₽</div>
-        <div class="adv__l">грузчик в час, можно без машины</div>
-      </div>
-      <div class="adv__i">
-        <svg class="adv__ic" aria-hidden="true"><use href="#i-doc"/></svg>
-        <div class="adv__v">НДС</div>
-        <div class="adv__l">безналичный расчёт, договор и закрывающие документы</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ СРАВНЕНИЕ ══════════ -->
-<section class="sec" id="why">
-  <div class="wrap">
-    <div class="shead">
-      <span class="eyebrow">Сравнение</span>
-      <h2>Перевозим без сюрпризов</h2>
-      <p>Разница между «нашли машину в объявлении» и компанией со своим парком и штатными грузчиками.</p>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
-    </div>
-
-    <div class="cmp">
-      <table>
-        <thead>
-          <tr><th scope="col">Параметр</th><th scope="col">Частное объявление</th><th scope="col">Грузилкин</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Подача</th><td>договариваются</td><td><svg aria-hidden="true"><use href="#i-check"/></svg>от 15 минут</td></tr>
-          <tr><th scope="row">Время работы</th><td>днём</td><td><svg aria-hidden="true"><use href="#i-check"/></svg>до 23:30, бывает и ночью</td></tr>
-          <tr><th scope="row">Автопарк</th><td>одна машина</td><td><svg aria-hidden="true"><use href="#i-check"/></svg>100+ машин</td></tr>
-          <tr><th scope="row">Грузчики</th><td>искать отдельно</td><td><svg aria-hidden="true"><use href="#i-check"/></svg>в штате, от 900 ₽/час</td></tr>
-          <tr><th scope="row">Тариф</th><td>устная договорённость</td><td><svg aria-hidden="true"><use href="#i-check"/></svg>фиксированный до начала</td></tr>
-          <tr><th scope="row">Безнал и НДС</th><td>редко</td><td><svg aria-hidden="true"><use href="#i-check"/></svg>есть, с НДС и без</td></tr>
-          <tr><th scope="row">Оценка</th><td>платно</td><td><svg aria-hidden="true"><use href="#i-check"/></svg>бесплатно, выезд оценщика</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
 
 
-<!-- ══════════ АВТОПАРК ══════════ -->
-<section class="sec park" id="park">
-  <div class="wrap">
-    <div class="shead">
-      <span class="eyebrow">Автопарк</span>
-      <h2>Выбирайте машину под задачу</h2>
-      <p>От небольшой Газели до крупнотоннажного транспорта. Цена за час работы по городу.</p>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
-    </div>
 
-    <div class="park__grid">
-      <article class="car">
-        <div class="car__ph car__ph--type"><svg class="car__ico car__ico--v-gazel3" aria-hidden="true"><use href="#v-gazel3"/></svg></div>
-        <div class="car__body">
-          <h3 class="car__h">Газель 3 м</h3>
-          <dl class="car__spec">
-            <div><dt>Кузов</dt><dd>3 × 1,8 × 1,8 м</dd></div>
-            <div><dt>Тент</dt><dd>есть</dd></div>
-          </dl>
-          <div class="car__p"><b>от 1 800 ₽</b><span>/час</span></div>
-          <a class="btn btn--on-dark btn--order" href="#calc" style="min-height:46px;font-size:14.5px" >Оформить заказ</a>
-        </div>
-      </article>
 
-      <article class="car">
-        <div class="car__ph car__ph--type"><svg class="car__ico car__ico--v-gazel42" aria-hidden="true"><use href="#v-gazel42"/></svg></div>
-        <div class="car__body">
-          <h3 class="car__h">Газель 4,2 м</h3>
-          <dl class="car__spec">
-            <div><dt>Кузов</dt><dd>4,2 × 1,9 × 2 м</dd></div>
-            <div><dt>Тент</dt><dd>есть</dd></div>
-          </dl>
-          <div class="car__p"><b>от 2 000 ₽</b><span>/час</span></div>
-          <a class="btn btn--on-dark btn--order" href="#calc" style="min-height:46px;font-size:14.5px" >Оформить заказ</a>
-        </div>
-      </article>
-
-      <article class="car">
-        <div class="car__ph car__ph--type"><svg class="car__ico car__ico--v-gazel56" aria-hidden="true"><use href="#v-gazel56"/></svg></div>
-        <div class="car__body">
-          <h3 class="car__h">Газель 5–6 м</h3>
-          <dl class="car__spec">
-            <div><dt>Длина кузова</dt><dd>5,2 и 6 м</dd></div>
-            <div><dt>Для чего</dt><dd>длинные и крупные грузы</dd></div>
-          </dl>
-          <div class="car__p"><b>от 2 200 ₽</b><span>/час</span></div>
-          <a class="btn btn--on-dark btn--order" href="#calc" style="min-height:46px;font-size:14.5px" >Оформить заказ</a>
-        </div>
-      </article>
-
-      <article class="car">
-        <div class="car__ph car__ph--type"><svg class="car__ico car__ico--v-manip" aria-hidden="true"><use href="#v-manip"/></svg></div>
-        <div class="car__body">
-          <h3 class="car__h">Манипулятор</h3>
-          <dl class="car__spec">
-            <div><dt>Подъём и перенос</dt><dd>груза с земли</dd></div>
-            <div><dt>Кран</dt><dd>стационарный</dd></div>
-          </dl>
-          <div class="car__p"><b>от 4 050 ₽</b><span>/час</span></div>
-          <a class="btn btn--on-dark btn--order" href="#calc" style="min-height:46px;font-size:14.5px" >Оформить заказ</a>
-        </div>
-      </article>
-
-      <article class="car">
-        <div class="car__ph car__ph--type"><svg class="car__ico car__ico--v-evac" aria-hidden="true"><use href="#v-evac"/></svg></div>
-        <div class="car__body">
-          <h3 class="car__h">Эвакуатор</h3>
-          <dl class="car__spec">
-            <div><dt>Платформа</dt><dd>с лебёдкой</dd></div>
-            <div><dt>Для чего</dt><dd>легковые и лёгкие грузовые</dd></div>
-          </dl>
-          <div class="car__p"><b>от 4 200 ₽</b><span>/час</span></div>
-          <a class="btn btn--on-dark btn--order" href="#calc" style="min-height:46px;font-size:14.5px" >Оформить заказ</a>
-        </div>
-      </article>
-
-      <article class="car">
-        <div class="car__ph car__ph--type"><svg class="car__ico car__ico--v-vyshka" aria-hidden="true"><use href="#v-vyshka"/></svg></div>
-        <div class="car__body">
-          <h3 class="car__h">Автовышка</h3>
-          <dl class="car__spec">
-            <div><dt>Высота подъёма</dt><dd>по запросу</dd></div>
-            <div><dt>Работы</dt><dd>высотные</dd></div>
-          </dl>
-          <div class="car__p"><b>от 4 350 ₽</b><span>/час</span></div>
-          <a class="btn btn--on-dark btn--order" href="#calc" style="min-height:46px;font-size:14.5px" >Оформить заказ</a>
-        </div>
-      </article>
-
-      <article class="car">
-        <div class="car__ph car__ph--type"><svg class="car__ico car__ico--v-samosval" aria-hidden="true"><use href="#v-samosval"/></svg></div>
-        <div class="car__body">
-          <h3 class="car__h">Самосвал</h3>
-          <dl class="car__spec">
-            <div><dt>ЗИЛ</dt><dd>3,5 т</dd></div>
-            <div><dt>КамАЗ</dt><dd>до 10 т</dd></div>
-          </dl>
-          <div class="car__p"><b>от 3 500 ₽</b><span>/час</span></div>
-          <a class="btn btn--on-dark btn--order" href="#calc" style="min-height:46px;font-size:14.5px" >Оформить заказ</a>
-        </div>
-      </article>
-    </div>
-
-    <p style="margin-top:22px;font-size:14px;color:var(--gray-2)">
-      Характеристики уточняются по конкретной машине. Точный тариф под маршрут называет диспетчер после уточнения адресов.
-    </p>
-  </div>
-</section>
-
-<!-- ══════════ КАК ЭТО РАБОТАЕТ ══════════ -->
-<!-- ══════════ ГРУЗЧИКИ ══════════ -->
-<section class="sec loaders" id="loaders">
-  <div class="wrap">
-    <div class="shead">
-      <span class="eyebrow">Грузчики</span>
-      <h2>Грузчики для переезда и погрузки</h2>
-      <p>Штатные грузчики с подготовкой, от 900 ₽/час за человека. Без машины тоже можно.</p>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
-    </div>
-
-    <div class="svcs">
-      <article class="svc">
-        <div class="svc__n">01</div>
-        <h3>Переезд от двери до двери</h3>
-        <p>Упакуем мебель и технику, разберём, погрузим, разгрузим и расставим по местам. Упаковку и коробки уберём после работы.</p>
-        <div class="svc__list"><span>Квартира</span><span>Офис</span><span>Дача</span></div>
-        </article>
-
-      <article class="svc">
-        <div class="svc__n">02</div>
-        <h3>Разбор и сборка мебели</h3>
-        <p>Разберём шкафы, комоды и кровати, погрузим, а на новом месте соберём и расставим. Монтаж бытовой техники.</p>
-        <div class="svc__list"><span>Разбор</span><span>Сборка</span><span>Монтаж техники</span></div>
-        </article>
-
-      <article class="svc">
-        <div class="svc__n">03</div>
-        <h3>Погрузка без машины</h3>
-        <p>Нужны только грузчики: выгрузка, подъём, перенос по этажу. Крепим мебель специальными ремнями внутри машины.</p>
-        <div class="svc__list"><span>Погрузка</span><span>Разгрузка</span><span>Перенос</span></div>
-        </article>
-
-      <article class="svc">
-        <div class="svc__n">04</div>
-        <h3>Вывоз и уборка</h3>
-        <p>Разберём старую мебель, вывезем строительный мусор и уберём на месте после погрузки.</p>
-        <div class="svc__list"><span>Старая мебель</span><span>Мусор</span><span>Уборка</span></div>
-        </article>
-    </div>
-
-    <div class="loaders__note">
-      <p><b>Оплата почасовая.</b> Каждый 10-й накопленный час работы газели или грузчика — бесплатно, в пределах Оренбурга и области. </p>
-      <p class="loaders__note-hi">Точную сумму называет диспетчер после уточнения объёма и условий.</p>
-      <a class="btn btn--main btn--order" href="#calc" style="min-height:46px;font-size:14.5px">Оформить заказ</a>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="steps">
-  <div class="wrap">
-    <div class="shead">
-      <span class="eyebrow">Как это работает</span>
-      <h2>Заказ машины — в 3 шага</h2>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
-    </div>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step__n">01</div>
-        <h3>Оставляете заявку</h3>
-        <p>Телефон, мессенджер или форма. Достаточно сказать, что и откуда нужно перевезти.</p>
-      </div>
-      <div class="step">
-        <div class="step__n">02</div>
-        <h3>Подбираем машину</h3>
-        <p>Учитываем груз, объём и адреса. Сразу называем фиксированную стоимость.</p>
-      </div>
-      <div class="step">
-        <div class="step__n">03</div>
-        <h3>Приезжаем и перевозим</h3>
-        <p>Машина, водитель и грузчики. Погрузка и выгрузка входят в работу.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ══════════ РЕАЛЬНАЯ РАБОТА ══════════ -->
 <section class="sec work" id="work">
@@ -1809,7 +1366,6 @@ html.no-speech .sayrow{display:none}
       <span class="eyebrow">Реальная работа</span>
       <h2>Так мы работаем каждый день</h2>
       <p>Кадры из отзывов клиентов — настоящие машины, водители и грузчики.</p>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
     </div>
 
     <div class="work__grid">
@@ -1880,7 +1436,6 @@ html.no-speech .sayrow{display:none}
       <div>
         <span class="eyebrow">Для бизнеса</span>
         <h2 style="font-size:clamp(28px,3.6vw,42px);max-width:16ch">Транспорт для бизнеса без собственного автопарка</h2>
-        <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
         <p class="biz__note" style="margin-top:20px">
           Подадим подходящий транспорт под регулярные и разовые задачи. Работаем по договору, закрывающие
           документы и НДС — чтобы бухгалтерия не задавала вопросов.
@@ -1920,7 +1475,6 @@ html.no-speech .sayrow{display:none}
       <span class="eyebrow">Отзывы</span>
       <h2>Клиенты рекомендуют Грузилкин</h2>
       <p>Рейтинг 4,8 ★ на Яндекс Картах (191 оценка) и 4,7 ★ в 2ГИС (122 оценки). Отзывы — как они опубликованы на этих платформах.</p>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
     </div>
 
             <div class="revs">
@@ -1979,7 +1533,6 @@ html.no-speech .sayrow{display:none}
       <span class="eyebrow">Клиенты</span>
       <h2>Кто нам доверяет</h2>
       <p>Эти компании заказывают перевозки у нас постоянно — от одной машины до переезда целого склада.</p>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
     </div>
 
     <div class="logos">
@@ -2012,7 +1565,6 @@ html.no-speech .sayrow{display:none}
     <div class="shead">
       <span class="eyebrow">Вопросы</span>
       <h2>Частые вопросы</h2>
-      <div class="sayrow"><button class="say" type="button" data-say-from="prev" aria-label="Озвучить"><svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg><svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg></button></div>
     </div>
 
     <div class="faq">
@@ -2078,16 +1630,7 @@ html.no-speech .sayrow{display:none}
     <div class="foot__grid">
       <div>
         <a class="brand" href="#top" style="margin-bottom:18px">
-          <!-- логотип в подвале: жёлтая плашка, грузовик тёмный.
-                 Здесь чёрный внутри — это цвет рисунка на жёлтом,
-                 а не тема. В шапке плашка графитовая, чтобы не
-                 выглядеть пятном на белом. -->
-          <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <rect x="1" y="1" width="38" height="38" rx="11" fill="#FFD400"/>
-            <rect x="8" y="13" width="15" height="11" rx="2" fill="#111111"/>
-            <path d="M24 17h4.6l3.4 3.2V24H24z" fill="#111111" fill-opacity=".5"/>
-            <circle cx="13" cy="28" r="2.6" fill="#111111"/><circle cx="27" cy="28" r="2.6" fill="#111111" fill-opacity=".5"/>
-          </svg>
+          <img class="brand__mark" src="assets/brand-logo.png" width="191" height="186" alt="">
           <span><span class="brand__name">ГРУЗИЛКИН</span><span class="brand__sub">Грузовое такси · Оренбург</span></span>
         </a>
         <p style="font-size:14px;color:var(--gray-2);max-width:30ch">
@@ -2144,58 +1687,134 @@ html.no-speech .sayrow{display:none}
   </div>
 </footer>
 
-<!-- фиксированная нижняя панель: только телефон -->
+<!-- Нижняя панель: одна кнопка с короткой новостью рынка. -->
 <div class="mobar">
   <div class="mobar__in">
-    <a class="btn btn--ghost" href="tel:+73532432424">
-      <svg aria-hidden="true"><use href="#i-phone"/></svg>Позвонить
-    </a>
-    <a class="btn btn--main" href="#calc">
-      <svg aria-hidden="true"><use href="#i-truck"/></svg>Оформить заказ
-    </a>
+    <div class="news" id="newsCard" hidden>
+      <article class="news__item">
+        <div class="news__head">
+          <div>
+            <div class="news__date">19 октября 2026</div>
+            <h2 class="news__ttl">Заявок на фуры внутри страны стало больше</h2>
   </div>
+          <button type="button" class="say" data-src="assets/news/01.mp3" aria-label="Проговорить" aria-pressed="false">
+            <svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg>
+            <svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg>
+          </button>
 </div>
-<!-- ══════════ ПОМОЩНИК И ИКОНКИ СВЯЗИ ══════════ -->
-<div class="dock" id="dock">
-  <div class="dock__col">
-    <a class="dock__b dock__b--wa" href="https://wa.me/79033695311" target="_blank" rel="noopener" aria-label="WhatsApp — написать в WhatsApp">
-      <span class="dock__tip">Написать в WhatsApp</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2Zm0 1.9a8.1 8.1 0 1 1-4.1 15.1l-.3-.2-3 .8.8-2.9-.2-.3A8.1 8.1 0 0 1 12 3.9Zm-3.6 4c-.2 0-.5 0-.7.4-.3.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.7 2.7 4.3 3.7 2.1.8 2.6.6 3 .6.6 0 1.6-.7 1.9-1.3.2-.7.2-1.2.1-1.4l-.6-.3-1.5-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.1-.2 0-.4.1-.5l.4-.5.3-.5v-.4l-.7-1.6c-.2-.4-.4-.4-.6-.4Z"/></svg>
-    </a>
-    <a class="dock__b dock__b--tg" href="https://t.me/gruzilkin56" target="_blank" rel="noopener" aria-label="Telegram — написать в Telegram">
-      <span class="dock__tip">Написать в Telegram</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.7 4.3 2.9 11.5c-1.1.4-1.1 1.1-.2 1.4l4.6 1.4 1.8 5.4c.2.6.1.8.7.8.5 0 .7-.2 1-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3-14c.3-1.2-.5-1.8-1.4-1.4ZM8.7 14.1l9.6-6.4c.4-.3.8-.1.5.2l-8 7.2-.3 3.3-1.8-4.3Z"/></svg>
-    </a>
-    <a class="dock__b dock__b--tel" href="tel:+73532432424" aria-label="Позвонить 8 (3532) 43-24-24">
-      <span class="dock__tip">Позвонить 8 (3532) 43-24-24</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3h3l1.5 3.8-2 1.3a11.5 11.5 0 0 0 5.2 5.2l1.3-2L19 12.8v3c0 1-.8 1.7-1.7 1.7C10 17.5 5.5 13 5.5 5.7 5.5 4.8 6.2 4 6.6 3Z"/></svg>
-    </a>
-    <a class="dock__b dock__b--max" href="https://max.ru" target="_blank" rel="noopener" aria-label="МАКС — написать в МАКС">
-      <span class="dock__tip">Написать в МАКС</span>
-      <svg viewBox="0 0 43 43" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M21.47 41.88c-4.11 0-6.02-.6-9.34-3-2.1 2.7-8.75 4.81-9.04 1.2 0-2.71-.6-5-1.28-7.5C1 29.5.08 26.07.08 21.1.08 9.23 9.82.3 21.36.3c11.55 0 20.6 9.37 20.6 20.91a20.6 20.6 0 0 1-20.49 20.67m.17-31.32c-5.62-.29-10 3.6-10.97 9.7-.8 5.05.62 11.2 1.83 11.52.58.14 2.04-1.04 2.95-1.95a10.4 10.4 0 0 0 5.08 1.81 10.7 10.7 0 0 0 11.19-9.97 10.7 10.7 0 0 0-10.08-11.1Z" clip-rule="evenodd"/></svg>
-    </a>
-    <button class="dock__b dock__b--bot" type="button" id="botOpen" aria-expanded="false" aria-controls="botPanel" aria-label="Открыть помощника">
-      <span class="dock__tip">Помощник Грузилкин</span>
-      <img src="data:image/webp;base64,UklGRugXAABXRUJQVlA4WAoAAAAQAAAAdwAAdwAAQUxQSDQIAAAB8IZtn9o2/v+9ZmQH6r63vBRaZmbm3cL7SDewzMzMUG6PZWZmxsJyKbDMXOaw7WCT2NbM635gmWas9/tpREwA/Q8rJZGUUhKRlCSkFH6RWpC/OjTzERrx5eK6K0gWf/4gHV8351ASJPJfgL74ifYAEB1Bh2MRnY9YjV98uJiOjiXiOJ2OVHPpTNVW6Rcf19HmCbj6Wzocs+lshCf6Rj1t2gLgVzoC34vTfWT2VxRswHNN6+lI/CpOM0Hki3eai4MN2O2g8XQE6ugMIwSR8CQiKe15DcPpU1xORIdjUNbkTFCmQ4YHrXmdh9FneNAZQseiR9Z6ZVsQkXCKgk4gORgUYpM99tuiKCAsQdI9gaF0H7qTKnMgpRDBC95/+Kap9941a9bdd0+64Ybbrxy7/YigTVOI6CmPSDUJElkSRHR8G6CRUnX9+v795+07KmDNF/j4vivpJPQmnURCSEEifSIhiIQInr0MGmnHN/zy6qX7jgza8hUAjDrCo2OCECQoUyGIZIDoqFYMLG2L9XZ1e/YOMvf/88al+44MWBN3edO70S1r0X40ScqmEKHLnpj8PmNgVVtfVyQajXZGo10DDPT+++p5O4dEzmS2XPCYu9Eja9F5rkOywJEZFgSIjmoFBjsHGBlq5v7fHjx+jJMzElkY7oFN70avcxIGF029fvKMKZMmpztp0sxp19/0GQB0d+sM2FVA89unlAZz9O33l5HM5A3IUZ1gYPhdHglkf6Ct0wXAnBY0A51zzqnIVWHJQ3dQJi9h100UWOGaWTnrW98ey1Jkdu6IjuCMnkNloQIzOtZj0KlFItbT1dPbk2lvT1d3DNlVHmflTNARakkmz2NsURyM5C55GhKD0XA0Gol6RiLRSCQaiUajHeH+LOmkj88qzxXR8RspsxpaBAXouL5YngIXhidFZ59dkbvDiZHBczjR+QOaGXiH6E47IkacQDQ4j0im8TLGFgMaaF68JV2sFfLVOCJy03HoXIwvcsHhCSHa6UUwWxE1YjwRrQORk+o4VMk/GGcSXeSCYb5iIPLxWeW5O56I1jNRINUE1NBTeJv2+whwYaE2ZjwRNSOt8TiNjtSfvqSgGdbMPrsid7VEFE7vv7w31TIABTuTOueemzNJZxNRX3qn8lB6AnGXYalioOPDM8tzdxERdaV3BUKhDdCwVjPUyucnbhHI2RlE1A+ioFeAnubgli7YpnjL5zcfMFzmbCIRgb8l4QgP8SpElXZhcbxpwfQTSgpFjojOICIaxAuFRI4jyKGl/4onYAuDEWuaP2NseZEkMxXwy1GFRFRAe+BaamO2J7Fh/vRxZcWCci6GJ9GAC/zz4BGFtMOSyKavQ8HaWNP8GWPLiySZuFPSSsUawJIv+/DZy1CwNtE0f/rY8mJBZh5HyZq1ywA0oGErx5q+mjG2vFiQmdI5bi0w0KbBrBUzNOxk6MF1X00fV1YsyFRBh9brWDcjfdbGAYmWBTPGlRdJMlJKR8ogDXlRI9GrAST6wEnGM4CNvz9WtVWxILNHh9HfruHqhcdCAYylPypAG6QZ6Jp//V5DJRm614ETz7iyqmToYWHENwLAswugAY1vnu3rgcmKgfDH52xdQKbCM7waKgEw9521PzRS1u34s3KN6njv1JKAMbMbP3360z4Aqp/h4ke6WSkPrTSeOw/mmkfFknac/91L8xJQ0Fh6TDvYAwAD9y2CNuq0UnPWrVqzrqvv2y2opBUayaxTIYFXr3bzFQBwApHptRf/qBhI4KEl4BRGW8DMgAbQ1MgA6/h+K9JSyrQSg7zZdZHMSGy/Ji2DU5QaB4C1R9fWa/3GU+Er6vCpH4pafYmR2GmN3yj2iG2z2m+8FU9d6i+MH1vASHZhpT06UfEGlIel1jA66XK4Sew3XeJKD4bv0FwoKAVO+ExYfAvNgH5nJdhHgMQPfUhg/oQ9i1psOrXEAgAKvxJRsNWm00ptUBqztjhjxpVj1tp0uhWuvozuALAsAiu9TrPBxUIaHvv1sukAW9P+7ikl5mk0l+/w4x+jiO5m15qO904tNY45MmJk9/IRVOwcCWVNeM752xYKwxS+qVzxyzByHKq0RAPoXnzr/sOkYdoFnpEkKUCPw7WCAfT/8+zJWxcJQ7TW2lUAIpUkJFGAnrUEYKjI4kkHD5eGwJN/JCIpKOkZazRDrXy+cjPHkCUrVv5MnpKSbVIMhN8/rSxgSOoAedukGeicd+F2hcKgAKVpEwPoWnzr/sMcM4QQlL4H29P/99O1WxUJIzL3gK0MFV486ZDh0hq9pBNshQbU6tdOKS+wBl822YPuulv2H+bY8SxUT9QSBjC45IXTdwhJKx6DUoOw1+1ofKBqu5A0z6EToWAvQ8eaG+6r3i4kjZO0h2sTwJxob3ygeruQNI0ceg/KJgCq/ev7KiuKhGlSbN7KbBXDDS+adMgIaRoF6E24VimGXvfGaRUF5om3LNMM9NTfdsAwxziyLXlwyQtn7BCSPpToaHygeruQzIXMUxxvrr+vetuQzEE28wM40d74QNW2Iek7gGr/+v6qbUPSqDfzA9z2hgeqtg1Jc2SwASoPMNht//r+qm2HBoQhgkKt4DwAMNyO+vtrdx0zJCgN+U9XngCgW+sfvfi43TYvNoIc53OofIFY648fPnjV2DIzAvQa3LzB8a6mPz+99ygSZrydT1jrWNsP15A046084qk2PuVHDCjM9iMwu1jgW4t9CVCoy8ZoEj61OWXuFwcW+dXB5FcH/d+VTT97Q8VUXo2rRaZ8jLz7oxkOTa5bWJdXF9Y9YoZfiqzIPJwNHwVWUDggjg8AANBCAJ0BKngAeAA+MRSIQyIhIRbInpQgAwSxAGgIMiVX6/zT7I/i/x5x0tX+ZNzb/yPuA+FPrV/PvsDfqv02/MV+1X7b+6//h/9h/dPfH6Cv8z/yXWqft57Dv7Aeml+2/wofuJ+6PuM/3H/55yX/Fu2r+8fkL5s+P7137Z+sp/c+APdV6JfyT7u/jvts8Un0B+P+oR+T/0X/Nflj+XnJsWV9Aj2q+zf7L+1eRJrGeA/Rp/Tf995VHi5UB/0X/vvUn/4fui96n0h/3f858B38n/p3+x/u/7xf4////VH7Bf2d9hz9PnMMFBRDFJ4wiSJW5pR2HhGMXr1O3CQW0m8LscbqKiAiHNBMVHO//h9J3P+Cbx9mGNNj2eI2Vz+4QmCYnhVbTgxo7Knv18cIqkJ4i5HX85iYXD/CKXnIlGr9HYavktNJUJlf3E2Xk2tOlo2ZqeYkS++mHBue1J6wd4c6pIjxaCJ7WgZcL8U2/MbaHUO8peCaTYhgnX2JExwJC5Gg00Pf7IximH9pnB4SEdzDXuLXyxyw6vw+XJnFfqrSIivZgnZhbXPMvqWypn/+99fdQig47H74yP4Lt38X1T/yyKZuH34osMKdfEZKHpsyKbCwH2ILcxfAqdYBbMVHZR+tGSC/FgydWmY5m38ckcZjwAF8fWvcAckObYA2wHNVINpOl977hZc8jkIgjco4hsJgQGBDutOZXGp2mROWKmToAAD+/2AZjBJcdgeZHFzQmjdJhpNUjMVWxRCvmOAwux83WdumeQAb1vXT3MReXSdhtKJxvP1RBS8LYBHNmRX9KH2gUP63fzjHSj3XXOb0bPIbvoRd7sLxw5snr6UCmc493oCRLwnLihKVW//+7miHCgH3QIMewMyPKaGTvwc8hkT9+dgX6NmPyPQvTgCwUs76nUpi24pe1fdIFQeVXrZ9GTUy08Rx9z3krpo7k8hht4g18WA9Z6IFR/bXdJI0c/d4oYAzXYAzCipkUFx4TzVYgNU/bvtc/8e1ccszn0BTuOB2F1K5rRMHAvQRN9Y9+/yk9E0IQ+74PCqYPpXL032t8D/22BgYpqhqTS/sqBiFpreoOGNhT6o/CU6M72WNHTcnI8IPFCSp2FWL/sr36y2NFdsI6OEsOusmOkKYbKBkRLeZ7t7huS63EpnZlA6gtIly+fPoYeGlzu/khDD9iAR0B6zy3u2r8XiXADOlanoE1A5aBdph4Lkskl0Pwzm2X1gAC3btvIJ+eF0w3hTHXXM95841Ul0I/EqBUTyDKrjiWjYT/D3EqNkb79KtZ+fFeepIbvoqOdSMWTbvm7w+c/1P3OZtdoeSQ9VtPhsHt6kCIKp8oS5dfvIbLVKFP0NTkXgtosxFlrcSF1tOS1Jf9GZKn9/95L4wGN+S31gqzuCdAfL88/WuDGlvMwSUDoLz/tqkR5V2HlaO2ZYh/+oF/f+MPuWyrHpm5jYpkrGgxryby6WdOOT8XbSCdI6gGsM3Yx7HCSJ49+xfFFTwABIu3a62phnViOYLFqAgaAFchkkG6RgnxIvGXg214/Kr7AGNcNJVVfkMP8q7BbRhMQQwTXWzEIPL2zFOr6FVUu6aL+uI3R8Dk54mjYsc4WuCPaMhGHPLcwkPxkjN/e0FwT4onLxTGuBemSCIkA12CJPsdqMXloBcOWD45EahtNOrTqNCGgtICQaU7DaAE+7fUjdGejnc8J/OQsYIl/yH9MGJEQjjCwWZQTnK6pDrki4l01Euey9zTLRKuNcaFmJGHAYUNi1i0jkLomGJWxCxbvXv2E87SxOv34GrFKAqPG+npYh84qhMOTqQSeAxVc1CuYkTPQY8iLTL1iyl/mI2o/OOWnJ0krU30qaxjg6rsXNVE0+a0mVboSOjIyc6TfiGuoFwGArjkOm8uYBEyBMTQvLsPhjHaxNfTxeWdl2Rk0VAGH1K/V6KnaYA8PY+oug7KOWh3rTMBgX0uTprv/y/VDtK6nY8qBNHi55tNSt29174m3sBiK6DmA4dcSQCmOXDEf52K3+4a0FIj1WIC1AYgzidkAfG4ajlhhFUmp/xz8ex5RQIXHRaMvgJOQ4Ot7prqHx0j5GHY6G4Lv10c2DJBzoMNj7qk4BP/+0qtfbn+D9886MWlgDs0b+59SJAcz2Y+B4JQaE9tM2nIpqn5CHfILIGVjV1TbbrUim6f4raRNYSClFRYb6/jjHT5IxpVoQri2Us4dHBbRMGZZfaUVd90HePKUV0yS4XJzDbcqcirwa8+rfCpO6LUDzt7p24C8wpDJXGtRYBj3E/jyjHiQC/SqN+cAZbBoxffQQ87FcY6l1DKOeMdmD/jn2PunshfyJ/2232vnB4fsG49ry7m4vM1JRn9allTb7SZYSctUPHK0Q2ZTX6V+3WuX0mVgs1yi2ooHjEvH5A78PdZI95m+1P9RG7uwWj8iK65gUm9zq/h6isdXXaYw/qo4Co792d+HYHpU4AKYGDFjOibJm7qwIiuNMlabRNsU4X/YJN0+hwA++dBRhxXP+41r8Xm4AgJ78eO8xeaiq7IIHnbtTAdxoHTxsGX29Aiy8n9TYi3LriPxfY7U+UzbnLL/LK2qMKLElcIm844KlT9TvWpq1YiJbUxKsUE5kyp0kLKxeSKC3NwVvv0oXVTl6giq869Vg8O/1p+StNrv8Hvgdu/7qeSuV/+F207WAsAUa/cj/KOIJMMj5zyVwVvIL09P7eY+83Xth4KOMKrxxaVABXeGk2UCTYuIhD2WDNenPp/vb+vf000kXyMHLiWW3legZfFlRbzwm8Qq1x+eBEMoJsXNH9JhvRI9VbUdpYOoT6izMvOxBNyjjNExdcW5PNgYvYai0xMUeQpPCxLkyW7dd69r8N0Soh5lAOMvGcVBHmN0KXFOXNmhpwAudzNK3aLQ6WwA0+5WKfB6lf4OjGyTuCWPsVzJn6FcpeEW7Eq4Gn2tbDpxKkt8WH4ZNfYLOSN9MysqZtoyjxpbNqF1OIPWYB8m3K5y+15CMxAfc3GBmTJ8mzlKUJEaJMUcKEK0+3AL2Yx6G6LdtRaTPp69kudIC87RWvuLa7LiNCgDeakB7HjAhXBrm+yxCABYDIX2ZtuTGipl1tRPFW59KcTgX5ro6UURrE5+jgRevc5QV9hbzVDUd0ZjL9HglvhcUvZFhXApIKPpx9wnJ2GeiQRONW+4Cfv/7p8bIwEvjBOyBgsO/UAbbrGcdYaBsXCkY20puxYdAi3lftVzw5cg/cZjWWl+0hsFOtIRkaMpn/IYp5J3957fRhq+Ybk+X7cXfU50sXTzTPoCsr/M9Fo8nqWni0COvYJViEYJXNSkBZiXRLyoSqxpT7qNbR2zRuQRJFjPqN3rMgv7PaIg3+kYIrFf5zwfoB1nonPY8SWmIoPIpENReSrZRdL7AfzDvXNKZHyg4j+sEAPuJ0j73wS0P/jXqJqcQ3ym0qlHiB8YngjlpqLAX6+V8peQJZ4XIUfrSLVnzhVYYmHJRebkDgY97KuC3/ug7l0N4Dg9mwtVMaWynckds6JP5CLfn79Sd4I9mRRHXSGQsrcVkeNvD/Mi7xDqAiUc6hxmss1+BqoMBnfLuMkgJRRqJR8qoTT+AVNYeamRnxvuSHnC4iEO8x5M4DKspPTFihueBWFfJgnUFpn1O5/rpUHt620ge7X3HdWqiInrNxht6Rj32k/DdA9nBvEwXmATv/qDBdV4YI8MhA9e8s+uFWnOICHMhv/C/hJtVwaOAXUpnh36sdXj8sIPDIq2ndXxH7jDak0S4qMRdbsVtY97oxwgnssP0UmgmnSJzk92jLoQxL4lNPvvIpY+nC6ZuS6CbnnVNhVI4YSV4+df6zzYCXfFrZSKIHS/aseJVVu39wlXixJDk4i1Z0dz10tG3TCKv78vQMWKxRR9ldc1/22cVaAf01RQwkWnUB+KOgRKghYi0CdeqrDla5Cdg9mhrH91asLUsAXm59r5bcpc+Tjx56CHUr/+D/o3/M//5vZgRglIep65wg97ojGo1kkMvvh6MgsR/B9NKZmqxr70ALXO0W1KxpCD9vLksC257aF7VeYPVno9QVdMBRIOeM3+XPdF2TpmUjRK4s3yahY/AYORKbpgih7/8X8DGGJS/S+tteTZn6+7qHUsukVX6OUR6LPpy0dgwTW6J+ZzwvYyj5e+mZY/yPO5tYAJbf9Gef2FiXpYf8HZJ68byTFb34YPOZ8c6drRcys7i0pt58bJPA/yzJoXT7PndnJrERVWfrvvXkiTSkxtP6rcHzF8otX10ZflGDaf3+Fk5dgVzSm2CmR12y52ypnFYDREDHwXU4hoU69d4r81/gsmtaZyVrGB/WIXtMEI3cGLxSzTjLwbNbi+Bhpy2PPqtKTcMuqjpsjOsOyr6uXIKLHlOKIRfFAZeEg7pJEOYG2704ELQOsjvtRSRRsbxP0cvJdTVmsfQXuABnYDvfWgu5hWXbHmfItRsfywxM/y3Oz+NuoaNSgs6DYENqydO6w12I0mbM8qf1HzK6hdm5404xyy3a2QML1Gy23GCZreocWYRAe4m1+M8HYk3UpqKR0PishJ692sjotxlGNyl9ERomV0br0at3zEbMP7QPZB1yKeehf030SvdDoMCEFbIj8WitbCM//InV2iaxYJEDIeD3HU8CnQ/hoDEQ4IlYos1VbipfSmR3Qlol/xQk/ReCihbujYmo8aEhYKD+rG/our6JWJC00uWfVD2idCP48h/j9Fnr1vSm7SMHMSCvWU5ri+W/8sgQwoLwG2KcKwqL4vDadsgW9hrGNzVGz5N16utw44i7DmE6aXwX8aIaQZyngXnfafX67VwhZardCL4UBIHXjeZ2QYj+xWkcDHEnsWekixx/YnByP4cJmjLJ+qo1h3VRIZ8JmnU6DepvDVAoVxFR2O/UI47eVpQqt1RGiebBB4xjp8HiGMShlW7b6hp6AGFapA/uxlKcdBWMJjofpr69wOw/0ChbvFZd4ufp/klT1Fsts6Tx/3Wfz9emW/6giFgh/JPQADrrZqhizkWjRnnHTiofMzrpkWTRj66g8edgngp2QN2v94f25jeoBbofMoH3y1w0w5HdMvwHeeWM1iYNJgx9ll8lAGJKq3jT9gNv0v/f4r34RxsCnZM8Vu/gs1QjxzSGGxOy7jPh4fOYQ5aeHqMYopLzjG2gDZActlSKMxtU2o1G+m7K0c/3VLgQkinyrfHvpRNcsrOV6EdX+/fSbFwqQOTSNZmSPrruUGJqJscIWYNUvAK/HtM0xALATe6nEoyXgIS5p2xrUVJHK7/zp69Q0PrvCbk7L5A6Cd0Ka/rgyowAASKpgAA=" alt="Помощник Грузилкин" class="dock__avatar" width="42" height="42">
+        <p>В третьем квартале заказов на автомобильную доставку по России было примерно на пятую часть больше, чем год назад, и около четверти больше, чем весной и летом. Цифру приводит биржа ATI.SU. Лето при этом штормило из‑за топлива и южных маршрутов, а ставки после скачка уже остывают.</p>
+      </article>
+      <article class="news__item">
+        <div class="news__head">
+          <div>
+            <div class="news__date">16 октября 2026</div>
+            <h2 class="news__ttl">Перевозчиков хотят собрать в открытый список</h2>
+          </div>
+          <button type="button" class="say" data-src="assets/news/02.mp3" aria-label="Проговорить" aria-pressed="false">
+            <svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg>
+            <svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg>
+    </button>
+        </div>
+        <p>Минтранс вынес на обсуждение общий порядок, по которому сведения о допущенных автоперевозчиках публикуют в одном реестре. В карточке — компания и её машины: марка, номер, допустимая масса. Вести список предлагают Ространснадзору, а новую запись показывать в течение рабочего дня. Заказчику так проще понять, кому он отдаёт груз.</p>
+      </article>
+      <article class="news__item">
+        <div class="news__head">
+          <div>
+            <div class="news__date">15 октября 2026</div>
+            <h2 class="news__ttl">Перекрытия дорог сведут в одну базу</h2>
+          </div>
+          <button type="button" class="say" data-src="assets/news/03.mp3" aria-label="Проговорить" aria-pressed="false">
+            <svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg>
+            <svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg>
+    </button>
+  </div>
+        <p>Госдума в первом чтении поддержала единый электронный перечень ограничений на дорогах. Туда попадут федеральные, региональные и частные участки: где закрыто, до какой даты и как объехать. Карты смогут забирать эти данные себе. Для тяжёлых и широких машин это способ заранее увидеть, пройдёт ли рейс.</p>
+      </article>
+      <article class="news__item">
+        <div class="news__head">
+          <div>
+            <div class="news__date">5 октября 2026</div>
+            <h2 class="news__ttl">Электронные накладные пошли потоком</h2>
+</div>
+          <button type="button" class="say" data-src="assets/news/04.mp3" aria-label="Проговорить" aria-pressed="false">
+            <svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg>
+            <svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg>
+          </button>
+  </div>
+        <p>За первый месяц обязательных электронных перевозочных документов оформили больше 39 миллионов штук — основную долю всего, что система приняла за предыдущие четыре года. Подключились сотни тысяч компаний. До 1 марта 2027 года за шероховатости в оформлении пока отделываются предупреждением: мелким перевозчикам нужно время на подпись.</p>
+      </article>
+      <article class="news__item">
+        <div class="news__head">
+          <div>
+            <div class="news__date">1 октября 2026</div>
+            <h2 class="news__ttl">Железнодорожный тариф на груз подняли</h2>
+          </div>
+          <button type="button" class="say" data-src="assets/news/05.mp3" aria-label="Проговорить" aria-pressed="false">
+            <svg class="say__play" aria-hidden="true"><use href="#i-sound"/></svg>
+            <svg class="say__stop" aria-hidden="true"><use href="#i-stop"/></svg>
+    </button>
+</div>
+        <p>С начала октября ставки на грузовые перевозки по железной дороге проиндексировали на 8,5%. Для тех, кто возит машинами, это соседний сигнал: часть груза может уйти на фуры, а часть отправителей заново сравнит длинное плечо и авто. На цену городской газели это не ложится напрямую, но общий рынок из‑за этого обычно шевелится.</p>
+      </article>
+    </div>
+    <button type="button" class="btn btn--main" id="newsOpen" aria-expanded="false" aria-controls="newsCard">
+      <svg aria-hidden="true"><use href="#i-doc"/></svg>Новости
     </button>
   </div>
 </div>
-
-<div class="bot" id="botPanel" role="dialog" aria-label="Помощник Грузилкин" aria-modal="false" hidden>
-  <div class="bot__head">
-    <img src="data:image/webp;base64,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" alt="" class="bot__head-avatar" width="32" height="32" aria-hidden="true">
-    <div class="bot__ttl">Помощник Грузилкин<small>отвечает по данным компании</small></div>
-    <button class="bot__x" type="button" id="botClose" aria-label="Закрыть помощника">×</button>
-  </div>
-  <div class="bot__log" id="botLog" role="log" aria-live="polite"></div>
-  <div class="bot__chips" id="botChips"></div>
-  <form class="bot__form" id="botForm">
-    <input class="bot__in" id="botIn" type="text" placeholder="Напишите вопрос…" aria-label="Вопрос помощнику" autocomplete="off">
-    <button class="bot__send" type="submit" aria-label="Отправить">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20.5 21 12 3 3.5l3 6.5 8 2-8 2-3 6.5Z"/></svg>
-    </button>
-  </form>
-</div>
+<script>
+(function () {
+  "use strict";
+  var btn = document.getElementById("newsOpen");
+  var card = document.getElementById("newsCard");
+  var says = card ? Array.prototype.slice.call(card.querySelectorAll(".say")) : [];
+  if (!btn || !card) return;
+  var audio = null;
+  function stopSay() {
+    if (audio) {
+      audio.pause();
+      audio = null;
+    }
+    says.forEach(function (b) {
+      b.classList.remove("is-on");
+      b.setAttribute("aria-pressed", "false");
+    });
+  }
+  function startSay(say) {
+    var src = say && say.getAttribute("data-src");
+    if (!src) return;
+    stopSay();
+    var mine = new Audio(src);
+    audio = mine;
+    say.classList.add("is-on");
+    say.setAttribute("aria-pressed", "true");
+    mine.onended = function () { if (audio === mine) stopSay(); };
+    mine.onerror = function () { if (audio === mine) stopSay(); };
+    var played = mine.play();
+    if (played && played.catch) played.catch(function () { if (audio === mine) stopSay(); });
+  }
+  says.forEach(function (say) {
+    say.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (say.classList.contains("is-on")) stopSay();
+      else startSay(say);
+    });
+  });
+  function setOpen(open) {
+    if (!open) stopSay();
+    card.hidden = !open;
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  btn.addEventListener("click", function () { setOpen(card.hidden); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setOpen(false);
+  });
+  document.addEventListener("click", function (e) {
+    if (!card.hidden && !e.target.closest(".mobar")) setOpen(false);
+  });
+  window.addEventListener("pagehide", stopSay);
+})();
+</script>
 
 <script>
 (function () {
@@ -2209,39 +1828,16 @@ html.no-speech .sayrow{display:none}
   var WA = "79033695311", TG = "gruzilkin56";
 
   /* ── 1. ШАПКА: залипает и темнеет ── */
-  var topbar = $("#topbar"), burger = $("#burger"), mobnav = $("#mobnav");
+  var topbar = $("#topbar");
   var onScroll = function () {
     if (topbar) topbar.classList.toggle("is-stuck", window.scrollY > 8);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  var setNav = function (open) {
-    if (!burger || !mobnav) return;
-    burger.setAttribute("aria-expanded", open ? "true" : "false");
-    burger.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
-    mobnav.classList.toggle("is-open", open);
-    mobnav.setAttribute("aria-hidden", open ? "false" : "true");
-    document.body.style.overflow = open ? "hidden" : "";
-  };
-  if (burger) {
-    burger.addEventListener("click", function () {
-      setNav(burger.getAttribute("aria-expanded") !== "true");
-    });
-  }
-  $$("#mobnav a").forEach(function (a) {
-    a.addEventListener("click", function () { setNav(false); });
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") setNav(false);
-  });
-  /* при возврате на широкий экран меню должно закрыться само */
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 1100) setNav(false);
-  });
 
   /* ── 2. ПОЯВЛЕНИЕ БЛОКОВ: один раз, без повтора ── */
-  var reveal = $$(".rv, .shead, .adv__i, .svc, .car, .step, .rev, .fq, .work__i, .biz__grid");
+  var reveal = $$(".rv, .shead, .rev, .fq, .work__i, .biz__grid");
   if ("IntersectionObserver" in window && reveal.length) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -2264,183 +1860,6 @@ html.no-speech .sayrow{display:none}
 
   
 
-  /* ── 3. ОЗВУЧИВАНИЕ ТЕКСТА ──
-     Синтез речи в браузере, сервер не нужен. Кнопки прячутся, если
-     браузер не умеет: показывать пустышку хуже, чем не показать. */
-  var supports = typeof window.speechSynthesis !== "undefined" &&
-    typeof window.SpeechSynthesisUtterance !== "undefined";
-  if (!supports) document.documentElement.classList.add("no-speech");
-  var current = null, currentBtn = null;
-
-  /* Русский голос запоминаем сразу и обновляем, когда браузер
-     пришлёт список. До этого переменная равна null — это и есть
-     признак «первого нажатия», когда голос ещё не готов. */
-  var ruVoice = null;
-  function refreshVoices() {
-    try {
-      var all = speechSynthesis.getVoices() || [];
-      ruVoice = null;
-      for (var i = 0; i < all.length; i++) {
-        if (/^ru/i.test(all[i].lang)) { ruVoice = all[i]; break; }
-      }
-      return ruVoice;
-    } catch (e) { return null; }
-  }
-  function pickVoice() { return ruVoice || refreshVoices(); }
-
-  /* Промпт: список голосов в Chrome приходит асинхронно. Без
-     этого первое нажатие говорит голосом по умолчанию, то есть
-     не по-русски, — ровно та поломка, которую слышали. */
-  var voiceWaiters = [];
-  if (supports) {
-    try {
-      refreshVoices();
-      speechSynthesis.onvoiceschanged = function () {
-        refreshVoices();
-        var w = voiceWaiters; voiceWaiters = [];
-        for (var i = 0; i < w.length; i++) w[i]();
-      };
-    } catch (e) {}
-  }
-  function whenVoiceReady() {
-    if (!supports) return Promise.resolve(null);
-    if (pickVoice()) return Promise.resolve(pickVoice());
-    refreshVoices();
-    if (pickVoice()) return Promise.resolve(pickVoice());
-    return new Promise(function (resolve) {
-      var done = false;
-      /* 400 мс, а не полторы секунды: столько хватает Chrome на
-         Voiceschanged. Дальше ждать нельзя — человек после
-         нажатия должен слышать речь сразу, пусть и голосом,
-         выбранным движком по lang ru-RU. */
-      var timer = setTimeout(function () {
-        if (done) return; done = true; resolve(ruVoice);
-      }, 400);
-      voiceWaiters.push(function () {
-        if (done) return; done = true; clearTimeout(timer); resolve(ruVoice);
-      });
-    });
-  }
-
-  /* Приводит текст к тому, что движок речи читает без запинок:
-     знак рубля заменяем словом, разделитель — запятой, двойные
-     пробелы и неразрывные — одним. Пробелы между соседними
-     элементами цены тоже склеивались: было «1 800 ₽в час». */
-  function clean(t) {
-    return (t || "")
-      .replace(/\u00a0/g, " ")
-      .replace(/₽\s*\/\s*час/g, " рублей в час")
-      .replace(/₽/g, " рублей")
-      .replace(/·/g, ",")
-      .replace(/\s*[—–]\s*/g, " — ")
-      .replace(/\s+\/\s+/g, " ")
-      /* убираем пробел перед знаком в конце цепочки: разделитель
-         «·» ещё не стал запятой, когда правило стояло в начале,
-         и пробел оставался — «минут , Работаем» */
-      .replace(/\s+([,.;:!?…])/g, "$1")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  /* Заголовок своей секции. На первом экране к нему добавляется
-     цена: «Газель с грузчиками от 1 800 рублей» произносится
-     одной фразой, а не ценой без названия машины. */
-  /* Вся секция целиком: заголовок, подзаголовок, названия и
-     описания карточек, шаги, вопросы с ответами.
-     Исключаем иконки (svg), кнопки и элементы с aria-hidden,
-     а также сами кнопки заказа — это действия, а не текст
-     секции. Скрытые элементы тоже пропускаем. */
-  var SKIP = 'svg,button,input,select,textarea,label,.sayrow,[aria-hidden="true"],.btn--order,.btn--ghost,.btn--on-dark,a[href^="tel"],a[href^="#calc"],a[href^="#contacts"]';
-  function sectionText(btn) {
-    var sec = btn.closest("section") || document;
-    var walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, null);
-    var parts = [];
-    var node;
-    while ((node = walker.nextNode())) {
-      var t = (node.nodeValue || "").replace(/\s+/g, " ").trim();
-      if (!t) continue;
-      var parent = node.parentElement;
-      if (!parent) continue;
-      if (parent.closest(SKIP)) continue;
-      if (!parent.offsetParent && !parent.getClientRects().length) continue;
-      parts.push(t);
-    }
-    return parts.join(" ");
-  }
-
-  /* Режем на фрагменты: Chrome обрывает озвучку примерно через
-     15 секунд, и длинный кусок просто замолчит на середине.
-     200 знаков — это около 13–15 секунд речи. */
-  function splitForSpeech(text) {
-    var max = 200;
-    var out = [];
-    var cur = "";
-    var sentences = text.match(/[^.!?…]+[.!?…]+|\S[^.!?…]*$/g) || [text];
-    for (var i = 0; i < sentences.length; i++) {
-      var s = sentences[i].trim();
-      if (!s) continue;
-      if ((cur + " " + s).length > max && cur) { out.push(cur); cur = s; }
-      else { cur = cur ? cur + " " + s : s; }
-    }
-    if (cur) out.push(cur);
-    return out;
-  }
-
-  function textFor(btn) {
-    var own = btn.getAttribute("data-say");
-    if (own) return clean(own);
-    return clean(sectionText(btn));
-  }
-
-  function stop() {
-    if (!supports) return;
-    try { speechSynthesis.cancel(); } catch (e) {}
-    if (currentBtn) { currentBtn.classList.remove("is-on"); currentBtn.setAttribute("aria-pressed", "false"); }
-    currentBtn = null; current = null;
-  }
-
-  function speak(btn) {
-    if (!supports) return;
-    var text = textFor(btn);
-    if (!text) return;
-    if (currentBtn === btn) { stop(); return; }
-    stop();
-    currentBtn = btn;
-    btn.classList.add("is-on");
-    btn.setAttribute("aria-pressed", "true");
-    /* токен отмены: пока current === token, очередь играет */
-    var token = {};
-    current = token;
-    var chunks = splitForSpeech(text);
-    var voice = null;
-    var i = 0;
-    function next() {
-      if (current !== token || i >= chunks.length) { stop(); return; }
-      var u = new SpeechSynthesisUtterance(chunks[i++]);
-      u.lang = "ru-RU";
-      u.rate = 1.02;
-      /* голос подставляем каждому фрагменту: их много, а голос
-         один, и без него русский текст читается с чужой
-         интонацией */
-      if (voice) u.voice = voice;
-      u.onend = function () { if (current === token) setTimeout(next, 140); };
-      u.onerror = function () { if (current === token) stop(); };
-      try { speechSynthesis.speak(u); } catch (e) { stop(); }
-    }
-    /* Голос может прийти не сразу; раньше без него фрагмент
-       молчал. Ждём, но не дольше 400 мс. */
-    whenVoiceReady().then(function (v) {
-      if (current !== token) return;
-      voice = v || null;
-      next();
-    });
-  }
-
-  $$(".say").forEach(function (btn) {
-    btn.setAttribute("aria-pressed", "false");
-    btn.addEventListener("click", function () { speak(btn); });
-  });
-  window.addEventListener("pagehide", stop);
 
   /* ── 4. КАЛЬКУЛЯТОР ──
      Цифры взяты из прайса компании, грузчик — 900 ₽/час за человека.
@@ -2534,6 +1953,16 @@ html.no-speech .sayrow{display:none}
 
 </script>
 
+<!-- Номер, если на этом устройстве нет приложения для звонка. -->
+<div class="dialsheet" id="dialSheet" hidden>
+  <div class="dialsheet__card" role="dialog" aria-modal="true" aria-label="Позвонить">
+    <button type="button" class="dialsheet__x" data-dial-close aria-label="Закрыть">×</button>
+    <div class="dialsheet__ttl">Позвонить</div>
+    <a class="dialsheet__num" href="tel:+73532432424">8 (3532) 43-24-24</a>
+    <a class="dialsheet__go" href="tel:+73532432424">Набрать номер</a>
+  </div>
+</div>
+
 <!-- ── Форма «Заказать звонок» ──
      Открывается кнопкой в шапке. Поверх всего, включая фото
      первого экрана. Без бэкенда: заявка уходит в WhatsApp
@@ -2560,433 +1989,19 @@ html.no-speech .sayrow{display:none}
   </div>
 </div>
 
-<!-- Помощник: отвечает по данным компании, собирает заявку -->
-<script>
-(function () {
-  "use strict";
-
-  var DATA = {
-    company: "ООО «ТРАНС-МИГ24»",
-    brand: "Грузилкин",
-    inn: "5611080930",
-    kpp: "561101001",
-    ogrn: "1175658019261",
-    okpo: "19458533",
-    bank: "ФИЛИАЛ «НИЖЕГОРОДСКИЙ» АО «АЛЬФА-БАНК»",
-    rs: "40702810729250006421",
-    ks: "30101810200000000824",
-    bik: "042202824",
-    director: "Моисеев Андрей Александрович",
-    accountant: "Мерзликина Ольга Николаевна",
-    edo: "2AE3828BFD7-4089-478D-8718-B1106053E505",
-    tel: "+73532432424",
-    telText: "8 (3532) 43-24-24",
-    extraTels: "(3532) 30-51-52, 56-57-37",
-    email: "absavto56rus@mail.ru",
-    site: "www.gryzilkin.ru",
-    wa: "79033695311",
-    tg: "gruzilkin56",
-    addr: "460003, г. Оренбург, проспект Братьев Коростелёвых, 179/4",
-    hours: "8:30 — 23:30",
-    fleet: [
-      ["Газель 3 м", "от 1 800 ₽/час"],
-      ["Газель 4,2 м", "от 2 000 ₽/час"],
-      ["Газель 5–6 м", "от 2 200 ₽/час"],
-      ["Самосвал", "от 3 500 ₽/час"],
-      ["Манипулятор", "от 4 050 ₽/час"],
-      ["Эвакуатор", "от 4 200 ₽/час"],
-      ["Автовышка", "от 4 350 ₽/час"]
-    ],
-    loader: "от 900 ₽/час за человека"
-  };
-
-  var PRICE_LIST =
-    "<b>Прайс на машины, за час работы:</b><ul>" +
-    DATA.fleet.map(function (f) { return "<li>" + f[0] + " — " + f[1] + "</li>"; }).join("") +
-    "<li>Грузчик — " + DATA.loader + "</li></ul>" +
-    "Первый час по городу оплачивается полностью, дальше поминутно по 15 минут. " +
-    "Каждый 10-й накопленный час газели или грузчика — бесплатно, в пределах Оренбурга и области.";
-
-  /* Вопросы. k — ключевые слова, a — ответ, c — быстрые кнопки после ответа.
-     a === null означает особый сценарий: оформление заявки. */
-  var INTENTS = [
-    { k: ["заказать грузчиков", "заказ грузчиков", "нанять грузчиков", "нужны грузчики", "вызвать грузчиков", "оформить грузчиков", "заказ грузчика", "нанять грузчика", "заказать грузчика"],
-      orderType: "loaders", a: null },
-    { k: ["машина и грузчики", "машина с грузчиками", "газель с грузчиками", "переезд с грузчиками", "машина плюс грузчики", "доставка с грузчиками", "машина грузчики"],
-      orderType: "both", a: null },
-    { k: ["реквизит", "инн", "огрн", "кпп", "бик", "расчетн", "счет", "банк", "юридическ адрес", "транс миг", "трансмиг", "директор"],
-      topic: "biz",
-      a: "<b>Официальные реквизиты компании:</b><br>" +
-         "<b>" + DATA.company + "</b> (служба «" + DATA.brand + "»)<br>" +
-         "• ИНН: " + DATA.inn + " · КПП: " + DATA.kpp + "<br>" +
-         "• ОГРН: " + DATA.ogrn + " · ОКПО: " + DATA.okpo + "<br>" +
-         "• " + DATA.bank + "<br>" +
-         "• Р/с: " + DATA.rs + "<br>" +
-         "• К/с: " + DATA.ks + " · БИК: " + DATA.bik + "<br>" +
-         "• Директор: " + DATA.director + "<br>" +
-         "• ЭДО: " + DATA.edo + "<br>" +
-         "• Адрес: " + DATA.addr,
-      c: ["Оформить заказ", "Работаете с юрлицами?"] },
-    { k: ["цена", "стоимост", "сколько стоит", "прайс", "почем", "почём", "тариф", "расценк", "деньг"],
-      topic: "price",
-      a: PRICE_LIST, c: ["Оформить заказ", "Какие машины есть?"] },
-    { k: ["машина", "машин", "автопарк", "техник", "что возит", "какие машины", "фур", "трал", "бычок", "фура"],
-      topic: "fleet",
-      a: "В парке 100+ машин, 13 видов транспорта:<ul>" +
-        DATA.fleet.map(function (f) { return "<li>" + f[0] + "</li>"; }).join("") +
-        "</ul>Не нашли нужную машину — напишите диспетчеру, подберём под груз.",
-      c: ["Сколько стоит доставка?", "Оформить заказ"] },
-    { k: ["газел", "газель"],
-      topic: "gazel",
-      a: "Газели трёх длин: 3 м — от 1 800 ₽/час, 4,2 м — от 2 000 ₽/час, 5–6 м — от 2 200 ₽/час. Есть тентованные и с бортом. Подача от 15 минут.",
-      c: ["Грузчики есть?", "Оформить заказ"] },
-    { k: ["грузчик", "грузчики", "такелаж", "разбор", "сборк", "перенос", "подъём", "подъем", "упаковк", "уборк"],
-      topic: "loaders",
-      a: "Грузчики — " + DATA.loader + ". Они в штате. Упаковка, разбор и сборка мебели, погрузка и разгрузка, перенос по этажу, вывоз старой мебели и строительного мусора.",
-      c: ["Заказать грузчиков", "Машина + грузчики", "Сколько стоит доставка?"] },
-    { k: ["подач", "сколько ждать", "быстро", "срочно", "долго ли", "когда приед"],
-      topic: "dispatch",
-      a: "Подача машины от 15 минут. Точное время по вашему адресу диспетчер называет сразу при оформлении заявки.",
-      c: ["Оформить заказ"] },
-    { k: ["ноч", "круглосуточ", "часы", "график", "когда работаете", "работаете ли", "работаете до", "выходн", "праздник"],
-      topic: "hours",
-      a: "Диспетчерская работает с " + DATA.hours + ", перевозки бывают и ночные. Первый час по городу оплачивается полностью, дальше поминутно по 15 минут.",
-      c: ["Оформить заказ"] },
-    { k: ["адрес", "где вы", "находитесь", "местонахожд", "как доехать", "карта"],
-      topic: "contacts",
-      a: "Мы находимся: " + DATA.addr + ".",
-      c: ["Позвонить", "Оформить заказ"] },
-    { k: ["телефон", "позвонить", "звонок", "номер", "связаться", "написать"],
-      topic: "contacts",
-      a: "Телефон диспетчера: <b>" + DATA.telText + "</b>. Есть WhatsApp и Telegram — кнопки справа внизу.",
-      c: ["Оформить заказ"] },
-    { k: ["договор", "юрлиц", "юридическ", "организац", "ндс", "безнал", "счет", "счёт", "офис", "компан"],
-      topic: "biz",
-      a: "Работаем с юридическими лицами: договор, безналичный расчёт, НДС и без НДС, закрывающие документы. Для регулярных перевозок — подача по графику.",
-      c: ["Оформить заказ", "Сколько стоит доставка?"] },
-    { k: ["страхов", "застрахов", "безопасн", "сохранност"],
-      topic: "cargo",
-      a: "Бесплатная страховка груза включена в заказ. Мебель крепим ремнями внутри машины.",
-      c: ["Оформить заказ"] },
-    { k: ["скидк", "бонус", "дешевле", "выгодн", "десятый", "10-й"],
-      topic: "bonus",
-      a: "Бонусная система: каждый 10-й накопленный час работы газели или грузчика — бесплатно, в пределах Оренбурга и области, при почасовом заказе.",
-      c: ["Оформить заказ"] },
-    { k: ["отзыв", "рейтинг", "доверя", "вас рекоменд"],
-      topic: "reviews",
-      a: "На Яндекс Картах рейтинг 4,8 (191 оценка), в 2ГИС — 4,7 (122 оценки). Работают грузчики и водители из штата.",
-      c: ["Оформить заказ"] },
-    { k: ["оплат", "картой", "наличн", "как платить"],
-      topic: "payment",
-      a: "Оплата наличными или по счёту для юридических лиц. Тариф фиксированный до начала работы.",
-      c: ["Оформить заказ"] },
-    { k: ["привет", "здравствуй", "хай", "добрый", "доброе", "здорово"],
-      topic: "hello",
-      a: "Здравствуйте! Я помощник Грузилкин. Знаю цены, машины, грузчиков и условия работы. Спросите о чём угодно или скажите «Оформить заказ».",
-      c: ["Сколько стоит доставка?", "Какие машины есть?", "Грузчики есть?"] },
-    { k: ["заказ", "оформит", "заявк", "вызвать", "нужна машина", "подать", "заказать"],
-      a: null }
-  ];
-
-  var CHIPS_MAIN = ["Сколько стоит доставка?", "Какие машины есть?", "Грузчики есть?",
-                    "Как быстро приедете?", "Работаете с юрлицами?", "Оформить заказ"];
-
-  var panel = document.getElementById("botPanel");
-  var openBtn = document.getElementById("botOpen");
-  var closeBtn = document.getElementById("botClose");
-  var log = document.getElementById("botLog");
-  var chipsBox = document.getElementById("botChips");
-  var form = document.getElementById("botForm");
-  var input = document.getElementById("botIn");
-  if (!panel || !openBtn || !log || !form || !input) return;
-
-  var state = null;
-  var started = false;
-  var lastTopic = null;
-
-  function el(tag, cls, html) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (html != null) e.innerHTML = html;
-    return e;
-  }
-
-  function scroll() { log.scrollTop = log.scrollHeight; }
-
-  function say(html, from) {
-    var m = el("div", "bot__m bot__m--" + (from === "u" ? "u" : "b"), html);
-    log.appendChild(m);
-    scroll();
-    return m;
-  }
-
-  function chips(list) {
-    chipsBox.innerHTML = "";
-    (list || []).forEach(function (t) {
-      var b = el("button", "bot__chip", t);
-      b.type = "button";
-      b.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        ask(t);
-      });
-      chipsBox.appendChild(b);
-    });
-  }
-
-  function norm(s) {
-    return (s || "").toLowerCase().replace(/ё/g, "е")
-      .replace(/[^a-zа-я0-9 ]+/g, " ").replace(/s+/g, " ").trim();
-  }
-
-  /* Побеждает не просто первое совпадение, а то, где длина совпавших
-     фраз больше. Это позволяет более точным фразам вроде «заказать грузчиков»
-     побеждать общие одиночные слова вроде «заказ» или «грузчик». */
-  function findIntent(q) {
-    var n = norm(q);
-    if (!n) return null;
-    var best = null, bestScore = 0;
-    for (var i = 0; i < INTENTS.length; i++) {
-      var score = 0;
-      for (var j = 0; j < INTENTS[i].k.length; j++) {
-        var kw = norm(INTENTS[i].k[j]);
-        if (n.indexOf(kw) !== -1) {
-          score += kw.length;
-        }
-      }
-      if (score > bestScore) { bestScore = score; best = INTENTS[i]; }
-    }
-    return best;
-  }
-
-  var STEPS = {
-    loaders: [
-      {
-        q: "Какая работа требуется для грузчиков и сколько человек нужно?<br>Напишите коротко: например, «2 грузчика на 2 часа для разгрузки» или «поднять диван на 5 этаж».",
-        c: ["2 грузчика на 2 часа", "1 грузчик на 2 часа", "Разгрузка / подъём", "Отмена"],
-        err: "Напишите пару слов — какая задача для грузчиков."
-      },
-      {
-        q: "Укажите адрес проведения работ (город, улица, дом, этаж, есть ли лифт):",
-        c: ["г. Оренбург", "Отмена"],
-        err: "Укажите адрес проведения работ."
-      },
-      {
-        q: "Оставьте телефон, по нему перезвонит диспетчер:",
-        c: ["Отмена"],
-        err: "Похоже, номер не полный. Напишите телефон целиком, например +7 900 000-00-00."
-      }
-    ],
-    both: [
-      {
-        q: "Что нужно перевезти и сколько потребуется грузчиков?<br>Напишите коротко: например, «переезд квартиры, Газель и 2 грузчика» или «доставить диван и поднять на этаж».",
-        c: ["Газель + 2 грузчика", "Газель + 1 грузчик", "Переезд квартиры", "Отмена"],
-        err: "Напишите пару слов — что перевезти и сколько грузчиков."
-      },
-      {
-        q: "Откуда и куда? Напишите адрес погрузки и адрес доставки:",
-        c: ["По Оренбургу", "Отмена"],
-        err: "Нужен адрес: откуда и куда."
-      },
-      {
-        q: "Оставьте телефон, по нему перезвонит диспетчер:",
-        c: ["Отмена"],
-        err: "Похоже, номер не полный. Напишите телефон целиком, например +7 900 000-00-00."
-      }
-    ],
-    transport: [
-      {
-        q: "Что нужно перевезти? Напишите коротко: например, «диван и коробки» или «стройматериалы».",
-        c: ["Переезд квартиры", "Стройматериалы", "Только грузчики", "Отмена"],
-        err: "Напишите пару слов — что перевезти."
-      },
-      {
-        q: "Откуда и куда? Напишите адрес погрузки и адрес доставки.",
-        c: ["По Оренбургу", "Отмена"],
-        err: "Нужен адрес: откуда и куда."
-      },
-      {
-        q: "Оставьте телефон, по нему перезвонит диспетчер.",
-        c: ["Отмена"],
-        err: "Похоже, номер не полный. Напишите телефон целиком, например +7 900 000-00-00."
-      }
-    ]
-  };
-
-  function startOrder(type) {
-    var t = type || "transport";
-    if (t !== "loaders" && t !== "both") t = "transport";
-    state = { type: t, step: 0, what: "", addr: "", phone: "" };
-    var step0 = STEPS[t][0];
-    say(step0.q);
-    chips(step0.c);
-  }
-
-  function orderStep(text) {
-    var t = (text || "").trim();
-    if (norm(t) === "отмена" || norm(t) === "отменить" || norm(t) === "назад") {
-      state = null;
-      lastTopic = null;
-      say("Хорошо, заявку не оформляю. Спросите что-нибудь ещё.");
-      chips(CHIPS_MAIN);
-      return;
-    }
-
-    if (state.step === 0) {
-      if (norm(t) === "только грузчики" || norm(t) === "грузчики" || norm(t) === "нужны грузчики") {
-        state.type = "loaders";
-        say(STEPS.loaders[0].q);
-        chips(STEPS.loaders[0].c);
-        return;
-      }
-      if (norm(t) === "машина и грузчики" || norm(t) === "машина плюс грузчики" || norm(t) === "машина грузчики") {
-        state.type = "both";
-        say(STEPS.both[0].q);
-        chips(STEPS.both[0].c);
-        return;
-      }
-    }
-
-    var curList = STEPS[state.type] || STEPS.transport;
-    if (state.step === 0) {
-      if (t.length < 2) { say(curList[0].err); return; }
-      state.what = t;
-    } else if (state.step === 1) {
-      if (t.length < 4) { say(curList[1].err); return; }
-      state.addr = t;
-    } else if (state.step === 2) {
-      var digits = t.replace(/\D/g, "");
-      if (digits.length < 10) {
-        say(curList[2].err);
-        return;
-      }
-      state.phone = t;
-      finishOrder();
-      return;
-    }
-    state.step++;
-    if (state.step < curList.length) {
-      say(curList[state.step].q);
-      chips(curList[state.step].c);
-    }
-  }
-
-  function finishOrder() {
-    var isLoaders = state.type === "loaders";
-    var isBoth = state.type === "both";
-    var serviceName = isLoaders ? "Грузчики (от 900 ₽/час)"
-                    : isBoth ? "Машина + грузчики"
-                    : "Грузоперевозка";
-    var taskLabel = isLoaders ? "Задача" : "Что перевезти";
-    var addrLabel = isLoaders ? "Адрес работ" : "Адрес";
-
-    var msg = "Заявка с сайта " + (DATA.brand || "Грузилкин") + "\n" +
-      "Услуга: " + serviceName + "\n" +
-      taskLabel + ": " + state.what + "\n" +
-      addrLabel + ": " + state.addr + "\n" +
-      "Телефон: " + state.phone;
-
-    say("Заявка готова. Куда её передать?");
-    var box = el("div", "bot__m bot__m--b");
-    box.innerHTML =
-      (isLoaders ? "<b>Услуга:</b> " + serviceName + "<br>" : "") +
-      "<b>" + taskLabel + ":</b> " + state.what + "<br>" +
-      "<b>" + addrLabel + ":</b> " + state.addr + "<br>" +
-      "<b>Телефон:</b> " + state.phone + "<br><br>" +
-      '<a href="https://wa.me/' + DATA.wa + '?text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener">Отправить в WhatsApp</a> · ' +
-      '<a href="https://t.me/share/url?url=' + encodeURIComponent(location.href) + '&text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener">В Telegram</a> · ' +
-      '<a href="tel:' + DATA.tel + '">Позвонить ' + DATA.telText + "</a>";
-    log.appendChild(box);
-    scroll();
-    chips(["Оформить заказ", "Сколько стоит доставка?"]);
-    state = null;
-    lastTopic = null;
-  }
-
-  function answer(q) {
-    var it = findIntent(q);
-    if (!it) {
-      lastTopic = null;
-      say("Точного ответа у меня нет — я не знаю этой темы. Напишите диспетчеру, ответят по делу:", "u");
-      say('<a href="https://wa.me/' + DATA.wa + '">WhatsApp</a> · <a href="https://t.me/' + DATA.tg + '">Telegram</a> · <a href="tel:' + DATA.tel + '">' + DATA.telText + "</a>");
-      chips(CHIPS_MAIN);
-      return;
-    }
-    if (it.a === null) {
-      var oType = it.orderType || (lastTopic === "loaders" ? "loaders" : "transport");
-      startOrder(oType);
-      return;
-    }
-    lastTopic = it.topic || null;
-    say(it.a);
-    chips(it.c || CHIPS_MAIN);
-  }
-
-  function ask(text) {
-    if (state) { say(text, "u"); orderStep(text); return; }
-    say(text, "u");
-    answer(text);
-  }
-
-  function openPanel(first) {
-    panel.hidden = false;
-    openBtn.setAttribute("aria-expanded", "true");
-    if (first && !started) {
-      started = true;
-      say("Здравствуйте! Я помощник Грузилкин. Знаю цены, машины, грузчиков, подачу и условия работы. Спросите — отвечу.");
-      chips(CHIPS_MAIN);
-    }
-    try { input.focus(); } catch (e) {}
-  }
-
-  function closePanel() {
-    panel.hidden = true;
-    openBtn.setAttribute("aria-expanded", "false");
-    openBtn.focus();
-  }
-
-  openBtn.addEventListener("click", function () {
-    if (panel.hidden) openPanel(true); else closePanel();
-  });
-  closeBtn.addEventListener("click", closePanel);
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !panel.hidden) closePanel();
-  });
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var v = input.value.trim();
-    if (!v) return;
-    input.value = "";
-    ask(v);
-  });
-
-  document.addEventListener("click", function (e) {
-    var t = e.target;
-    var b = t && t.closest ? t.closest("[data-order-open]") : null;
-    if (!b) return;
-    e.preventDefault();
-    openPanel(true);
-    startOrder(lastTopic === "loaders" ? "loaders" : "transport");
-  });
-
-  /* кнопки показываются только вместе со скриптом: без него они были бы мёртвыми */
-  document.documentElement.classList.add("has-bot");
-})();
-</script>
 
 <!-- Форма «Заказать звонок»: открытие, закрытие, отправка в WhatsApp -->
 <script>
 (function () {
   "use strict";
   var modal = document.getElementById("callModal");
-  var openBtn = document.getElementById("callOpen");
+  var openers = document.querySelectorAll("[data-call-open]");
   var form = document.getElementById("callForm");
   var done = modal.querySelector(".callmodal__done");
   var phone = document.getElementById("callPhone");
   var doneText = document.getElementById("callDoneText");
   var doneTimer = null;
-  if (!modal || !openBtn || !form) return;
+  if (!modal || !openers.length || !form) return;
 
   function show(open) {
     modal.hidden = !open;
@@ -3001,7 +2016,9 @@ html.no-speech .sayrow{display:none}
     done.hidden = true;
   }
 
-  openBtn.addEventListener("click", function () { show(true); });
+  openers.forEach(function (b) {
+    b.addEventListener("click", function () { show(true); });
+  });
   modal.querySelector(".callmodal__x").addEventListener("click", function () { show(false); });
   modal.addEventListener("click", function (e) {
     if (e.target === modal) show(false);
@@ -3038,6 +2055,190 @@ html.no-speech .sayrow{display:none}
       finish(false);
     }
     window.open("https://wa.me/79033695311?text=" + encodeURIComponent(text), "_blank", "noopener");
+  });
+})();
+</script>
+<script>
+/* Портрет «Позвонить».
+   Телефон: ссылка tel: открывает набор.
+   Компьютер: в браузере набор не запускается, поэтому сразу
+   показываем номер и даём его скопировать. */
+(function () {
+  "use strict";
+  var link = document.querySelector(".hero__call");
+  var sheet = document.getElementById("dialSheet");
+  if (!link || !sheet) return;
+  var go = sheet.querySelector(".dialsheet__go");
+  var NUMBER = "8 (3532) 43-24-24";
+  var pc = !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  function close() { sheet.hidden = true; }
+  function copyNumber() {
+    function ok() { if (go) go.textContent = "Номер скопирован"; }
+    function fail() { if (go) go.textContent = "Скопируйте номер выше"; }
+    function legacy() {
+      var t = document.createElement("textarea");
+      t.value = NUMBER;
+      t.setAttribute("readonly", "");
+      t.style.position = "fixed";
+      t.style.left = "-999px";
+      document.body.appendChild(t);
+      t.select();
+      var done = false;
+      try { done = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(t);
+      return done;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(NUMBER).then(ok, function () {
+        if (legacy()) ok(); else fail();
+      });
+    } else if (legacy()) ok();
+    else fail();
+  }
+  if (pc && go) go.textContent = "Скопировать номер";
+  link.addEventListener("click", function (e) {
+    if (pc) {
+      e.preventDefault();
+      sheet.hidden = false;
+      var num = sheet.querySelector(".dialsheet__num");
+      if (num && window.getSelection) {
+        var range = document.createRange();
+        range.selectNodeContents(num);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      return;
+    }
+    var took = false;
+    function mark() { took = true; }
+    window.addEventListener("pagehide", mark, { once: true });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) mark();
+    }, { once: true });
+    setTimeout(function () {
+      if (!took && !document.hidden) sheet.hidden = false;
+    }, 450);
+  });
+  if (go) go.addEventListener("click", function (e) {
+    if (!pc) return;
+    e.preventDefault();
+    copyNumber();
+  });
+  sheet.addEventListener("click", function (e) {
+    if (e.target === sheet) close();
+  });
+  var x = sheet.querySelector("[data-dial-close]");
+  if (x) x.addEventListener("click", close);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !sheet.hidden) close();
+  });
+})();
+</script>
+<script>
+/* Один таймер на обе кнопки: горит строго одна. */
+(function () {
+  "use strict";
+  var order = document.querySelector(".btn-blink-order");
+  var call = document.querySelector(".hero__call-label");
+  if (!order || !call) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var period = 1300;
+  function tick() {
+    var yellow = (Date.now() % period) < period / 2;
+    order.classList.toggle("is-lit", yellow);
+    call.classList.toggle("is-lit", !yellow);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+<script>
+/* Островок выдвигает описание отдела прямо под пунктом. */
+(function () {
+  "use strict";
+  var sheet = document.getElementById("islandShot");
+  if (!sheet) return;
+  var textEl = document.getElementById("islandShotText");
+  var nameEl = document.getElementById("islandShotName");
+  var current = null;
+
+  function fill(btn) {
+    var title = (btn.textContent || "").trim();
+    nameEl.textContent = title;
+    textEl.textContent = btn.getAttribute("data-desc") || title;
+  }
+  function mark(btn) {
+    document.querySelectorAll(".hero__type.is-on").forEach(function (b) {
+      b.classList.remove("is-on");
+      b.setAttribute("aria-expanded", "false");
+    });
+    if (btn) {
+      btn.classList.add("is-on");
+      btn.setAttribute("aria-expanded", "true");
+    }
+  }
+
+  var wait = 0;
+  var MOVE = 740;
+
+  function park(fromBtn) {
+    if (fromBtn) {
+      fromBtn.classList.remove("is-on");
+      fromBtn.setAttribute("aria-expanded", "false");
+    }
+    var list = document.querySelector(".hero__types");
+    if (list) list.after(sheet);
+  }
+  function open(btn) {
+    var li = btn.closest("li");
+    if (!li) return;
+    fill(btn);
+    current = btn;
+    mark(btn);
+    li.appendChild(sheet);
+    sheet.classList.remove("is-open");
+    void sheet.offsetHeight;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        if (current !== btn) return;
+        sheet.classList.add("is-open");
+      });
+    });
+  }
+
+  document.querySelectorAll(".hero__type").forEach(function (btn) {
+    if (btn.tagName === "A") return;
+    btn.setAttribute("aria-expanded", "false");
+    btn.addEventListener("click", function () {
+      if (current === btn && (sheet.classList.contains("is-open") || sheet.parentNode === btn.parentNode)) {
+        var closing = btn;
+        current = null;
+        sheet.classList.remove("is-open");
+        var token = ++wait;
+        setTimeout(function () {
+          if (token !== wait || current) return;
+          park(closing);
+        }, MOVE);
+      return;
+    }
+      if (sheet.classList.contains("is-open") && current) {
+        var prev = current;
+        var next = btn;
+        current = null;
+        sheet.classList.remove("is-open");
+        var token = ++wait;
+        setTimeout(function () {
+          if (token !== wait) return;
+          park(prev);
+          open(next);
+        }, MOVE);
+      return;
+    }
+      var token = ++wait;
+      open(btn);
+      void token;
+    });
   });
 })();
 </script>
