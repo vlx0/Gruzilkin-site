@@ -15,7 +15,7 @@
 <header class="topbar" id="topbar">
   <div class="topbar__in">
     <a class="brand" href="index.html" aria-label="Грузилкин — на главную">
-      <img class="brand__mark" src="assets/brand-logo.png" width="191" height="186" alt="">
+      <img class="brand__mark" src="assets/brand-logo.webp" width="191" height="186" alt="">
       <span>
         <span class="brand__name">ГРУЗИЛКИН</span>
         <span class="brand__sub">Грузовое такси · Оренбург</span>
@@ -49,7 +49,7 @@
 <main id="main" class="page">
   <div class="gazeli-photos">
       <figure>
-        <img src="assets/gazeli/board.png?v=13" width="251" height="94" alt="Газель с открытым бортом">
+        <img src="assets/gazeli/board.webp?v=14" width="251" height="94" alt="Газель с открытым бортом">
         <figcaption>Газель открытая, от 3 до 6.2м.<br>Подача от 20 мин.</figcaption>
         <div class="gazeli-split" aria-hidden="true">
           <span></span>
@@ -58,7 +58,7 @@
         </div>
       </figure>
       <figure>
-        <img src="assets/gazeli/tent-side.png?v=26" width="405" height="189" alt="Газель с серым тентом">
+        <img src="assets/gazeli/tent-side.webp?v=27" width="405" height="189" alt="Газель с серым тентом">
         <figcaption class="is-2">Газель Европлатформа от 3 до 6.2м.<br>Подача от 15 мин.</figcaption>
         <div class="gazeli-split" aria-hidden="true">
           <span></span>
@@ -67,7 +67,7 @@
         </div>
       </figure>
       <figure>
-        <img src="assets/gazeli/fridge.png?v=18" width="375" height="314" alt="Газель-рефрижератор">
+        <img src="assets/gazeli/fridge.webp?v=19" width="375" height="314" alt="Газель-рефрижератор">
         <figcaption class="is-2">Температурный режим от +5°C до -20°C.<br>Грузоподъемность до 2т</figcaption>
       </figure>
   </div>
@@ -78,7 +78,7 @@
     <div class="foot__grid">
       <div>
         <a class="brand" href="index.html">
-          <img class="brand__mark" src="assets/brand-logo.png" width="32" height="32" alt="">
+          <img class="brand__mark" src="assets/brand-logo.webp" width="32" height="32" alt="">
           <span><span class="brand__name">ГРУЗИЛКИН</span><span class="brand__sub">Грузовое такси · Оренбург</span></span>
         </a>
         <p style="font-size:14px;margin-top:12px">Газели 3–6,2 м, тент и открытые, с грузчиками или без. С 2009 года.</p>
@@ -121,6 +121,50 @@
     requestAnimationFrame(tick);
   }
   tick();
+})();
+</script>
+<script>
+(function () {
+  var KEY = "gk-build";
+  function paint(v) {
+    if (!v) return;
+    document.querySelectorAll('a[href^="index.html"]').forEach(function (a) {
+      var href = a.getAttribute("href") || "";
+      if (href.indexOf("?v=") !== -1) return;
+      a.setAttribute("href", href.replace(/^index\.html/, "index.html?v=" + encodeURIComponent(v)));
+    });
+  }
+  function apply() {
+    var v = "";
+    try { v = sessionStorage.getItem(KEY) || ""; } catch (e) {}
+    paint(v);
+  }
+  apply();
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("a") : null;
+    if (!a) return;
+    var href = a.getAttribute("href") || "";
+    if (href.indexOf("index.html") !== 0 || href.indexOf("?v=") !== -1) return;
+    var v = "";
+    try { v = sessionStorage.getItem(KEY) || ""; } catch (err) {}
+    if (!v) return;
+    e.preventDefault();
+    location.href = href.replace(/^index\.html/, "index.html?v=" + encodeURIComponent(v));
+  }, true);
+  var x = new XMLHttpRequest();
+  x.open("GET", "index.html?chk=" + Date.now(), true);
+  try { x.setRequestHeader("Cache-Control", "no-store"); } catch (e2) {}
+  x.onreadystatechange = function () {
+    if (x.readyState !== 4) return;
+    if (x.status !== 200 && x.status !== 304) return;
+    var m = /name="gruzilkin-build"\s+content="([^"]*)"/.exec(x.responseText || "");
+    if (!m) return;
+    try { sessionStorage.setItem(KEY, m[1]); } catch (e3) {}
+    paint(m[1]);
+  };
+  try { x.send(); } catch (e4) {}
+  setTimeout(apply, 0);
+  setTimeout(apply, 300);
 })();
 </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="gruzilkin-build" content="1791834478917">
+<meta name="gruzilkin-build" content="1793551200001">
 <title>Грузовое такси с грузчиками в Оренбурге — 8 (3532) 43-24-24 · Грузилкин</title>
 <meta name="description" content="Грузовое такси и грузчики в Оренбурге с 2009 года. Подача газели от 15 минут, 100+ машин, 8 (3532) 43-24-24.">
 <meta property="og:type" content="website">
@@ -948,25 +948,48 @@ html.no-speech .sayrow{display:none}
 /* Сверка версии: страница могла прийти из кэша телефона, хотя на
    сервере уже новая. Узнаём это здесь и перезагружаемся. */
 (function () {
-  var mine = document.querySelector('meta[name="gruzilkin-build"]');
-  if (!mine) return;
-  mine = mine.getAttribute("content") || "";
+  var KEY = "gk-build";
+  var mineEl = document.querySelector('meta[name="gruzilkin-build"]');
+  if (!mineEl) return;
+  var mine = mineEl.getAttribute("content") || "";
+  try { sessionStorage.setItem(KEY, mine); } catch (e0) {}
+  function stamp(v) {
+    if (!v) return;
+    try { sessionStorage.setItem(KEY, v); } catch (e) {}
+    var want = "v=" + encodeURIComponent(v);
+    if ((location.search || "").indexOf(want) !== -1) return;
+    if (v !== mine) {
+      location.replace(location.pathname + "?" + want);
+      return;
+    }
+    try { history.replaceState(null, "", location.pathname + "?" + want + location.hash); } catch (e2) {}
+  }
   try {
-    if (sessionStorage.getItem("gk-seen") === mine) return;
-  } catch (e) {}
-  var url = location.pathname + "?chk=" + Date.now();
-  var x = new XMLHttpRequest();
-  x.open("GET", url, true);
-  try { x.setRequestHeader("Cache-Control", "no-cache"); } catch (e) {}
-  x.onreadystatechange = function () {
-    if (x.readyState !== 4) return;
-    if (x.status !== 200 && x.status !== 304) return;
-    var m = /name="gruzilkin-build"\s+content="([^"]*)"/.exec(x.responseText || "");
-    if (!m || m[1] === mine) return;
-    try { sessionStorage.setItem("gk-seen", mine); } catch (e) {}
-    location.replace(location.pathname + "?v=" + m[1]);
-  };
-  try { x.send(); } catch (e) {}
+    var known = sessionStorage.getItem(KEY) || "";
+    if (known && known !== mine) stamp(known);
+  } catch (e3) {}
+  function check() {
+    var x = new XMLHttpRequest();
+    x.open("GET", location.pathname + "?chk=" + Date.now(), true);
+    try { x.setRequestHeader("Cache-Control", "no-store"); } catch (e4) {}
+    x.onreadystatechange = function () {
+      if (x.readyState !== 4) return;
+      if (x.status !== 200 && x.status !== 304) return;
+      var m = /name="gruzilkin-build"\s+content="([^"]*)"/.exec(x.responseText || "");
+      if (!m) return;
+      stamp(m[1]);
+    };
+    try { x.send(); } catch (e5) {}
+  }
+  check();
+  window.addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    try {
+      var k = sessionStorage.getItem(KEY) || "";
+      if (k && k !== mine) { stamp(k); return; }
+    } catch (e6) {}
+    location.reload();
+  });
 })();
 </script>
 </head>
@@ -979,7 +1002,7 @@ html.no-speech .sayrow{display:none}
 <header class="topbar" id="topbar">
   <div class="topbar__in">
     <a class="brand" href="index.html" aria-label="Грузилкин — на главную">
-      <img class="brand__mark" src="assets/brand-logo.png" width="191" height="186" alt="">
+      <img class="brand__mark" src="assets/brand-logo.webp" width="191" height="186" alt="">
       <span>
         <span class="brand__name">ГРУЗИЛКИН</span>
         <span class="brand__sub">Грузовое такси · Оренбург</span>
